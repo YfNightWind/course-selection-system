@@ -1,14 +1,15 @@
 package com.alexlin.dao;
 
 import com.alexlin.model.Student;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface StudentDao {
     List<Student> findAll();
-    Student studentLogin(String name, String password);
-    public int addStudent(Student student);
-    public int deleteStudent(int s_id);
-    public int updateStudent(Student student);
-    public Student findStudentById(int id);
+    Student studentLogin(@Param("name") String name, @Param("password") String password);
+    int addStudent(Student student);
+    int deleteStudent(int s_id);
+    int updateStudent(Student student);
+    Student findStudentById(int id);
 }
