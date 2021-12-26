@@ -18,4 +18,9 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findAll() {
         return studentDao.findAll();
     }
+
+    @Override
+    public Student studentLogin(String name, String password) {
+        return studentDao.studentLogin(name, password);
+    }
 }

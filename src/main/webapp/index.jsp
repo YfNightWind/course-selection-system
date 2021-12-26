@@ -17,5 +17,6 @@ h2
     <c:forEach items="${list}" var="Student">
         ${Student.s_id}--${Student.s_name}--${Student.s_password}<br>
     </c:forEach>
+<c:out value="${msg}" />
 </body>
 </html>
