@@ -26,6 +26,10 @@
 
 
 </body>
+
+<%--这边尝试使用jQuery--%>
+
+
 <script>
     var btn = document.getElementsByTagName('input')[2];
     btn.onclick = function() {
@@ -45,8 +49,11 @@
             if (xhr.readyState === 4) {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     result.innerHTML = xhr.responseText;
-                    console.log(xhr);
+                    console.log(xhr.response);
+                    console.log(xhr.status);// 状态码
                 }
+            } else {
+                alert(111);
             }
         }
     }
