@@ -1,5 +1,6 @@
 package com.alexlin.controller;
 
+import com.alexlin.model.Student;
 import com.alexlin.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,4 +20,5 @@ public class StudentController {
         modelAndView.addObject("list",studentService.findAll());
         return modelAndView;
     }
+
 }
