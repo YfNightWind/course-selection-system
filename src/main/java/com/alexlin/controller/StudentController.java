@@ -5,10 +5,7 @@ import com.alexlin.service.StudentService;
 import com.alexlin.utils.ReturnContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -26,8 +23,9 @@ public class StudentController {
     }
     // 学生登录
     @PostMapping("/login")
+    @ResponseBody
     public ReturnContent login(@RequestParam(value = "name", defaultValue = "") String name,
-                               @RequestParam(value = "password",defaultValue = "") String password) {
+                               @RequestParam(value = "password", defaultValue = "") String password) {
 
         Student student = studentService.studentLogin(name, password);
 
