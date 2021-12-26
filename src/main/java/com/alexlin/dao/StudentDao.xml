@@ -2,6 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.alexlin.dao.StudentDao">
     <select id="findAll" resultType="Student">
-        select * from student
+        SELECT * FROM student
+    </select>
+
+    <!--    用户登录-->
+    <select id="studentLogin" resultType="Student" parameterType="String">
+        SELECT * FROM student WHERE s_name = #{name} AND s_password = #{password}
+    </select>
+    <insert id="addStudent" parameterType="Student">
+        insert into student(s_name,s_password,s_num)
+        values(#{s_name},#{s_password},#{s_num});
+    </insert>
+    <delete id="deleteStudent" parameterType="Integer">
+        delete from student where s_id = #{id};
+    </delete>
+    <update id="updateStudent" parameterType="Student">
+        update student
+        set s_name=#{s_name},s_password=#{s_password},s_num=#{s_num},t_id=#{t_id}
+        where s_id  = #{s_id};
+    </update>
+    <select id="findStudentById" parameterType="Integer" resultType="Student">
+        select * from student where s_id = #{id};
     </select>
 </mapper>

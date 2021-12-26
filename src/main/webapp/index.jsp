@@ -15,6 +15,11 @@
 </head>
 <body>
 
+<form>
+    <input type="text"  name="name"> 姓名</input>
+    <input type="password" name="password" >密码</input>
+    <input type="submit">提交</input>
+</form>
 
 
 
@@ -22,10 +27,7 @@
 
 </body>
 <script>
-    var btn = document.getElementsByTagName('button')[0];
-
-
-
+    var btn = document.getElementsByTagName('input')[2];
     btn.onclick = function() {
         // console.log(1);
 
@@ -33,27 +35,20 @@
 
         // 这边做数据的呈现
         var result = document.getElementById("result");
-        // 再去设置reslut的文本
+        // 再去设置result的文本
 
-        xhr.open('GET', 'http://localhost:8080/');
+        xhr.open('GET', 'http://localhost:8080/student/login');
 
         xhr.send();
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status >= 200 && xhr.status < 300) {
-                    result.innerHTML = xhr.response;
+                    result.innerHTML = xhr.responseText;
+                    console.log(xhr);
                 }
             }
         }
-
-
-
-
-
-
-
-
     }
 </script>
 </html>

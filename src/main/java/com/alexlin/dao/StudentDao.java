@@ -5,5 +5,10 @@ import com.alexlin.model.Student;
 import java.util.List;
 
 public interface StudentDao {
-    public List<Student> findAll();
+    List<Student> findAll();
+    Student studentLogin(String name, String password);
+    public int addStudent(Student student);
+    public int deleteStudent(int s_id);
+    public int updateStudent(Student student);
+    public Student findStudentById(int id);
 }
