@@ -5,7 +5,6 @@ import com.alexlin.service.StudentService;
 import com.alexlin.utils.ReturnContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +24,6 @@ public class StudentController {
         modelAndView.addObject("list",studentService.findAll());
         return modelAndView;
     }
-
     // 学生登录
     @PostMapping("/login")
     public ReturnContent login(@RequestParam(value = "name", defaultValue = "") String name,

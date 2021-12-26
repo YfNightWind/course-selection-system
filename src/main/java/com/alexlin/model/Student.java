@@ -4,6 +4,16 @@ public class Student {
     private int s_id;
     private String s_name;
     private String s_password;
+    private int s_num;
+    private int t_id=0;
+
+    public int getS_num() {
+        return s_num;
+    }
+
+    public void setS_num(int s_num) {
+        this.s_num = s_num;
+    }
 
     public int getS_id() {
         return s_id;
@@ -33,6 +43,25 @@ public class Student {
         this.s_id = s_id;
         this.s_name = s_name;
         this.s_password = s_password;
+    }
+
+    public int getT_id() {
+        return t_id;
+    }
+
+    public void setT_id(int t_id) {
+        this.t_id = t_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "s_id=" + s_id +
+                ", s_name='" + s_name + '\'' +
+                ", s_password='" + s_password + '\'' +
+                ", s_num=" + s_num +
+                ", t_id=" + t_id +
+                '}';
     }
 
     public Student() {
