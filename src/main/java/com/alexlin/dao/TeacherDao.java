@@ -6,9 +6,9 @@ import com.alexlin.model.Teacher;
 import java.util.List;
 
 public interface TeacherDao {
-    public List<Teacher> findAll();
-    public int addTeacher(Teacher teacher);
-    public int deleteTeacher(int s_id);
-    public int updateTeacher(Teacher teacher);
-    public Teacher findTeacherById(int id);
+    List<Teacher> findAll();
+    int addTeacher(Teacher teacher);
+    int deleteTeacher(int s_id);
+    int updateTeacher(Teacher teacher);
+    Teacher findTeacherById(int id);
 }

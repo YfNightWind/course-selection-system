@@ -5,5 +5,5 @@ import com.alexlin.model.Admin;
 import java.util.List;
 
 public interface AdminDao {
-    public List<Admin> findAll();
+    List<Admin> findAll();
 }
