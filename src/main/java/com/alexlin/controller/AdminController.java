@@ -1,8 +1,7 @@
 package com.alexlin.controller;
 
 
-import com.alexlin.model.Student;
-import com.alexlin.model.Teacher;
+import com.alexlin.dao.TeacherDao;
 import com.alexlin.service.StudentService;
 import com.alexlin.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -20,6 +17,10 @@ public class AdminController {
     private TeacherService teacherService;
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private TeacherDao teacherDao;
+
     @GetMapping("/demo")
     public ModelAndView demo() {
 //        System.out.println("-----------findAll()-----------");
@@ -61,7 +62,7 @@ public class AdminController {
 
 
 
-        /*---------------student---------------------*/
+//        /*---------------student---------------------*/
 //        System.out.println("inserting");
 //        Student student = new Student();
 //        student.setS_name("张无f");
@@ -93,6 +94,49 @@ public class AdminController {
 //        int id=8;
 //        Student student = studentService.findStudentById(id);
 //        System.out.println(student.toString());
+
+
+
+
+
+//
+//        System.out.println("--------------update----------------");
+//        int id=1;
+//        SelectInfo selectInfo = new SelectInfo();
+//        selectInfo.setS_id(1);
+//        selectInfo.setV1(1);
+//        selectInfo.setV2(2);
+//        selectInfo.setV3(3);
+//        int affectRows = selectInfoService.updateSelectInfo(selectInfo);
+//        System.out.println(affectRows+"rows been update");
+
+
+//        System.out.println("--------------delete----------------");
+//        int id = 1;
+//        int affectRows = selectInfoService.deleteSelectInfo(id);
+//        System.out.println(affectRows+"rows been deleted");
+
+//        System.out.println("--------------findStudentById----------------");
+//        int id=1;
+//        SelectInfo selectInfo = selectInfoService.findSelectInfoById(id);
+//        System.out.println(selectInfo.toString());
+//
+//                System.out.println("-----------findAll()-----------");
+//        List<SelectInfo> selectInfoList = selectInfoService.findAll();
+//        for(SelectInfo selectInfo2:selectInfoList){
+//            System.out.println(selectInfo2.toString());
+//        }
+
+/*差额补选--------------------------------------------------------------------------------------------------*/
+//        int t_id=studentService.byElection(4);
+//        System.out.println("id为"+t_id+"的导师成为了该学生的老师");
+
+
+/*设置学生状态--------------------------------------------------------------------------------------*/
+//        studentService.setReady(10);
+//        studentService.setV1Out(2);
+//        studentService.setV2Out(4);
+//        studentService.setV3Out(8);
 
 
         ModelAndView modelAndView = new ModelAndView();

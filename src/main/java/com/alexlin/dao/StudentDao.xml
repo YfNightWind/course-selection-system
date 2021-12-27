@@ -24,4 +24,16 @@
     <select id="findStudentById" parameterType="Integer" resultType="Student">
         select * from student where s_id = #{id};
     </select>
+
+    <!--设置学生的导师号字段-->
+    <update id="setTeacher" parameterType="Student">
+        update student
+        set t_id=#{t_id},state=#{state}
+        where s_id  = #{s_id};
+    </update>
+    <!--设置学生状态-->
+    <update id="setState" parameterType="Student">
+        update student set state=#{state}
+        WHERE s_id = #{s_id};
+    </update>
 </mapper>

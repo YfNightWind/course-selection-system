@@ -6,6 +6,42 @@ public class Student {
     private String s_password;
     private int s_num;
     private int t_id=0;
+    private String state="Start";
+    private int v1;
+    private int v2;
+    private int v3;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public int getV1() {
+        return v1;
+    }
+
+    public void setV1(int v1) {
+        this.v1 = v1;
+    }
+
+    public int getV2() {
+        return v2;
+    }
+
+    public void setV2(int v2) {
+        this.v2 = v2;
+    }
+
+    public int getV3() {
+        return v3;
+    }
+
+    public void setV3(int v3) {
+        this.v3 = v3;
+    }
 
     public int getS_num() {
         return s_num;
@@ -61,6 +97,10 @@ public class Student {
                 ", s_password='" + s_password + '\'' +
                 ", s_num=" + s_num +
                 ", t_id=" + t_id +
+                ", state='" + state + '\'' +
+                ", v1=" + v1 +
+                ", v2=" + v2 +
+                ", v3=" + v3 +
                 '}';
     }
 

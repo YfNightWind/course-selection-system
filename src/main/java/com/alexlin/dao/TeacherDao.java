@@ -11,4 +11,5 @@ public interface TeacherDao {
     public int deleteTeacher(int s_id);
     public int updateTeacher(Teacher teacher);
     public Teacher findTeacherById(int id);
+    public int addScount(int t_id);
 }
