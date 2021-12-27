@@ -23,11 +23,7 @@ public class StudentServiceImpl implements StudentService {
         return studentDao.findAll();
     }
 
-    @Override
-<<<<<<< HEAD
 
-=======
->>>>>>> e9f212da5288147a825f2f54c165b0b0e58b6791
     public Student studentLogin(String name, String password) {
         return studentDao.studentLogin(name, password);
     }
@@ -43,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student findStudentById(int id) {return studentDao.findStudentById(id);}
 
-<<<<<<< HEAD
+
     @Override
     public void setTeacher(int s_id, int t_id) {
         Student student = new Student();
@@ -104,6 +100,5 @@ public class StudentServiceImpl implements StudentService {
         studentDao.setState(student);
     }
 
-=======
->>>>>>> e9f212da5288147a825f2f54c165b0b0e58b6791
+
 }
