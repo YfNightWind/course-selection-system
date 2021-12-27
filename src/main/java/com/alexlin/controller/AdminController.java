@@ -128,15 +128,15 @@ public class AdminController {
 //        }
 
 /*差额补选--------------------------------------------------------------------------------------------------*/
-        int t_id=studentService.byElection(2);
-        System.out.println("id为"+t_id+"的导师成为了该学生的老师");
+//        int t_id=studentService.byElection(2);
+//        System.out.println("id为"+t_id+"的导师成为了该学生的老师");
 
 
 /*设置学生状态--------------------------------------------------------------------------------------*/
-        studentService.setReady(4);
-        studentService.setV1Out(8);
-        studentService.setV2Out(9);
-        studentService.setV3Out(10);
+//        studentService.setReady(4);
+//        studentService.setV1Out(8);
+//        studentService.setV2Out(9);
+//        studentService.setV3Out(10);
 
 
         ModelAndView modelAndView = new ModelAndView();
