@@ -13,7 +13,7 @@ public interface StudentDao {
     int deleteStudent(int s_id);
     int updateStudent(Student student);
     Student findStudentById(int id);
-    public int setTeacher(Student student);
-    public void setState(Student student);
+    int setTeacher(Student student);
+    void setState(Student student);
 
 }
