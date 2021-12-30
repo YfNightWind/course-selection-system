@@ -12,6 +12,7 @@
 <head>
 
     <title>Title</title>
+    <script src="http://localhost:8080/js/common.js"></script>
 </head>
 <body>
 
@@ -21,13 +22,39 @@
     <input type="submit" onclick="">提交</input>
 </form>
 
-
-
+<input type="text"  name="name" id="name"> 姓名</input>
+<input type="password" name="password" id="password" >密码</input>
+<input type="submit" onclick="demo()">提交demo</input>
 
 
 </body>
 
-
+<script>
+    var resultdata ={};
+    function demo(){
+        var xhr =new XMLHttpRequest();
+        xhr.onreadystatechange=()=>{
+            if(xhr.readyState==4){
+                if((xhr.status>=200&&xhr.status<300)||xhr.status==304){
+                    alert(xhr.responseText);
+                    resultdata =JSON.parse(xhr.responseText);
+                }else{
+                    alert("Request was unsuccessful:"+xhr.status);
+                }
+            }
+        }
+        var url ='http://localhost:8080/student/login';
+        xhr.open("post",url,true);
+        var data={
+            "name":document.getElementById("name").value,
+            "password":document.getElementById("password").value
+        };
+        //此句代码不可删去，否则报400错误
+        data = JSON.stringify(data);
+        //xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xhr.send(data);
+    }
+</script>
 
 <%--<script>--%>
 <%--    var btn = document.getElementsByTagName('input')[2];--%>
