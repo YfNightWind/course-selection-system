@@ -30,9 +30,8 @@ demofd
 </body>
 
 <script>
-    var resultdata ={};
     function demo(){
-        var url = 'http://localhost:8080/admin/login';
+        var url = 'http://localhost:8080/demo/login';
         //数据的键要与model中类的属性一一对应
         var data={
             "s_name":document.getElementById("name").value,
