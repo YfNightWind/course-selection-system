@@ -35,4 +35,6 @@ public class StudentController {
             return new ReturnContent(true, "成功", student);
         }
     }
+
 }
+

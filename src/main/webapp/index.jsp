@@ -19,14 +19,15 @@
 <form action = "student/login" method="post">
     <input type="text"  name="name"> 姓名</input>
     <input type="password" name="password" >密码</input>
-    <input type="submit" onclick="">提交</input>
+    <input type="submit" >提交</input>
 </form>
 
 <input type="text"  name="name" id="name"> 姓名</input>
 <input type="password" name="password" id="password" >密码</input>
-<input type="submit" onclick="demo()">提交demo</input>
+<input type="submit" onclick="demo()">提交demo</button>
 
-demofd
+<button onclick="toform()">模拟form表单</button>
+
 </body>
 
 <script>
@@ -38,14 +39,25 @@ demofd
             "s_password":document.getElementById("password").value
         }
         post(url,data,function(result){
-            if(result.code){
-                alert("true");
-            }else{
-                alert("false");
-            }
+            console.log(result);
+            console.log(result.code);
+            console.log(result.result.s_name);
+
         });
     }
 
+    function toform(){
+        var url = 'http://localhost:8080/student/login';
+        //数据的键要与model中类的属性一一对应
+        var data={
+            "name":document.getElementById("name").value,
+            "password":document.getElementById("password").value
+        }
+        formPost(url,data,function(result){
+            alert(result);
+            console.log(result);
+        });
+    }
 </script>
 
 <%--<script>--%>
