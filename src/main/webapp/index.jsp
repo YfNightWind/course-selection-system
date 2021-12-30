@@ -47,16 +47,26 @@
     }
 
     function toform(){
+        // var url = 'http://localhost:8080/student/login';
+        // //数据的键要与model中类的属性一一对应
+        // var data={
+        //     "name":document.getElementById("name").value,
+        //     "password":document.getElementById("password").value
+        // }
+        // formPost(url,data,function(result){
+        //     alert(result);
+        //     console.log(result);
+        // });
         var url = 'http://localhost:8080/student/login';
-        //数据的键要与model中类的属性一一对应
         var data={
             "name":document.getElementById("name").value,
             "password":document.getElementById("password").value
         }
-        formPost(url,data,function(result){
-            alert(result);
+        formPost(url,data,function (result){
             console.log(result);
-        });
+        })
+
+        //location.href="url";
     }
 </script>
 
