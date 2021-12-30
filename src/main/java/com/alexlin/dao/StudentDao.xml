@@ -5,14 +5,19 @@
         SELECT * FROM student
     </select>
 
-    <!--    用户登录-->
+    <!-- 学生登录-->
     <select id="studentLogin" resultType="Student" parameterType="String">
         SELECT * FROM student WHERE s_name = #{name} AND s_password = #{password}
     </select>
+    <!-- 学生注册-->
     <insert id="addStudent" parameterType="Student">
-        insert into student(s_name,s_password,s_num)
-        values(#{s_name},#{s_password},#{s_num});
+        INSERT INTO student(s_name,s_password,s_num)
+        VALUES(#{name},#{password},#{studentNumber})
     </insert>
+    <!-- 以学号查找学生，判断该学生是否注册过-->
+    <select id="findStudentByNumber" resultType="Student" parameterType="String">
+        SELECT s_name FROM student WHERE s_num = #{studentNumber}
+    </select>
     <delete id="deleteStudent" parameterType="Integer">
         delete from student where s_id = #{id};
     </delete>

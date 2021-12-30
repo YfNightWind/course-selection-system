@@ -6,9 +6,12 @@ import java.util.List;
 
 public interface StudentService {
     List<Student> findAll();
-
+    // 学生登录
     Student studentLogin(String name, String password);
-    int addStudent(Student student);
+    // 学生注册
+    int addStudent(String name, String password, String studentNumber);
+    // 判断学生是否注册过
+    Student findStudentByNumber(String studentNumber);
     int deleteStudent(int s_id);
     int updateStudent(Student student);
     Student findStudentById(int s_id);

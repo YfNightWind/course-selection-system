@@ -28,16 +28,30 @@ public class StudentServiceImpl implements StudentService {
         return studentDao.studentLogin(name, password);
     }
 
-    public int addStudent(Student student) { return studentDao.addStudent(student);}
+    @Override
+    public int addStudent(String name, String password, String studentNumber) {
+        return studentDao.addStudent(name, password, studentNumber);
+    }
 
     @Override
-    public int deleteStudent(int s_id) { return studentDao.deleteStudent(s_id);}
+    public Student findStudentByNumber(String studentNumber) {
+        return studentDao.findStudentByNumber(studentNumber);
+    }
 
     @Override
-    public int updateStudent(Student student) {return studentDao.updateStudent(student);}
+    public int deleteStudent(int s_id) {
+        return studentDao.deleteStudent(s_id);
+    }
 
     @Override
-    public Student findStudentById(int id) {return studentDao.findStudentById(id);}
+    public int updateStudent(Student student) {
+        return studentDao.updateStudent(student);
+    }
+
+    @Override
+    public Student findStudentById(int id) {
+        return studentDao.findStudentById(id);
+    }
 
 
     @Override
@@ -52,20 +66,20 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int byElection(int s_id) {
-        int t_id=0;
+        int t_id = 0;
         List<Teacher> teacherList = teacherDao.findAll();
-        for(Teacher teacher:teacherList){
-            if(teacher.getS_count()<teacher.getS_max()){
+        for (Teacher teacher : teacherList) {
+            if (teacher.getS_count() < teacher.getS_max()) {
                 t_id = teacher.getT_id();
                 Student student = new Student();
                 student.setS_id(s_id);
                 student.setT_id(t_id);
                 //学生导师确定
-                setTeacher(s_id,t_id);
+                setTeacher(s_id, t_id);
                 break;
             }
         }
-        return  t_id;
+        return t_id;
     }
 
     @Override
