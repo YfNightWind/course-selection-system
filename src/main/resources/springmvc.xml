@@ -8,15 +8,15 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
     <!-- 启动注解驱动-->
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven/>
 
     <!-- 扫描业务代码-->
-    <context:component-scan base-package="com.alexlin"></context:component-scan>
+    <context:component-scan base-package="com.alexlin"/>
 
     <!-- 配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/"></property>
-        <property name="suffix" value=".jsp"></property>
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
     <!-- 将springmvc 不能处理的请求交给tomcat 例如静态资源 -->
     <mvc:default-servlet-handler/>
