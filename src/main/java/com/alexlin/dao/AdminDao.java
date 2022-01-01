@@ -1,9 +1,9 @@
 package com.alexlin.dao;
 
 import com.alexlin.model.Admin;
-
-import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface AdminDao {
-    List<Admin> findAll();
+    Admin adminLogin(@Param("name") String name,
+                     @Param("password") String password);
 }
