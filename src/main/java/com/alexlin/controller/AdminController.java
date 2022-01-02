@@ -28,7 +28,7 @@ public class AdminController {
         if (admin == null) {
             return new ReturnContent(false, "账号或密码错误", "");
         } else {
-            return new ReturnContent(true, "登录成功！", "");
+            return new ReturnContent(true, "登录成功！", admin);
         }
     }
 }
