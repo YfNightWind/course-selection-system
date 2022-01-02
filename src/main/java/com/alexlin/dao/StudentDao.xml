@@ -2,43 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.alexlin.dao.StudentDao">
     <select id="findAll" resultType="Student">
-        SELECT * FROM student
+        SELECT *
+        FROM student
     </select>
 
     <!-- 学生登录-->
     <select id="studentLogin" resultType="Student" parameterType="String">
-        SELECT * FROM student WHERE s_name = #{name} AND s_password = #{password}
+        SELECT *
+        FROM student
+        WHERE s_name = #{name}
+          AND s_password = #{password}
     </select>
     <!-- 学生注册-->
     <insert id="addStudent" parameterType="Student">
-        INSERT INTO student(s_name,s_password,s_num)
-        VALUES(#{name},#{password},#{studentNumber})
+        INSERT INTO student(s_name, s_password, s_num)
+        VALUES (#{name}, #{password}, #{studentNumber})
     </insert>
     <!-- 以学号查找学生，判断该学生是否注册过-->
     <select id="findStudentByNumber" resultType="Student" parameterType="String">
-        SELECT s_name FROM student WHERE s_num = #{studentNumber}
+        SELECT s_name
+        FROM student
+        WHERE s_num = #{studentNumber}
     </select>
     <delete id="deleteStudent" parameterType="Integer">
-        delete from student where s_id = #{id};
+        delete
+        from student
+        where s_id = #{id};
     </delete>
+    <!-- 更新学生-->
     <update id="updateStudent" parameterType="Student">
         update student
-        set s_name=#{s_name},s_password=#{s_password},s_num=#{s_num},t_id=#{t_id}
-        where s_id  = #{s_id};
+        <set>
+            <if test="s_name != null and s_name != ''">s_name = #{s_name},</if>
+            <if test="s_password != null and s_password != ''">s_password=#{s_password},</if>
+            <if test="s_num != null and s_num != ''">s_num=#{s_num},</if>
+            <if test="t_id != null and t_id != ''">t_id=#{t_id}</if>
+        </set>
+        where s_num = #{s_num}
     </update>
     <select id="findStudentById" parameterType="Integer" resultType="Student">
-        select * from student where s_id = #{id};
+        select *
+        from student
+        where s_id = #{id};
     </select>
 
     <!--设置学生的导师号字段-->
     <update id="setTeacher" parameterType="Student">
         update student
-        set t_id=#{t_id},state=#{state}
-        where s_id  = #{s_id};
+        set t_id=#{t_id},
+            state=#{state}
+        where s_id = #{s_id};
     </update>
     <!--设置学生状态-->
     <update id="setState" parameterType="Student">
-        update student set state=#{state}
+        update student
+        set state=#{state}
         WHERE s_id = #{s_id};
     </update>
 </mapper>
