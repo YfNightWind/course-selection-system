@@ -22,13 +22,27 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public int addTeacher(Teacher teacher) { return teacherDao.addTeacher(teacher);}
+    public Teacher teacherLogin(String name, String password) {
+        return teacherDao.teacherLogin(name, password);
+    }
 
     @Override
-    public int deleteTeacher(int s_id) { return teacherDao.deleteTeacher(s_id);}
+    public int addTeacher(String name, String password) {
+        return teacherDao.addTeacher(name, password);
+    }
 
     @Override
-    public int updateTeacher(Teacher teacher) {return teacherDao.updateTeacher(teacher);}
+    public int deleteTeacher(int s_id) {
+        return teacherDao.deleteTeacher(s_id);
+    }
 
     @Override
-    public Teacher findTeacherById(int id) {return teacherDao.findTeacherById(id);}}
+    public int updateTeacher(Teacher teacher) {
+        return teacherDao.updateTeacher(teacher);
+    }
+
+    @Override
+    public Teacher findTeacherById(int id) {
+        return teacherDao.findTeacherById(id);
+    }
+}

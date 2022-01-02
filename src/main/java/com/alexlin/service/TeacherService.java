@@ -8,8 +8,15 @@ import java.util.List;
 
 public interface TeacherService {
     List<Teacher> findAll();
-    int addTeacher(Teacher teacher);
+
+    // 教师登录
+    Teacher teacherLogin(String name, String password);
+
+    int addTeacher(String name, String password);
+
     int deleteTeacher(int t_id);
+
     int updateTeacher(Teacher teacher);
+
     Teacher findTeacherById(int t_id);
 }

@@ -2,26 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.alexlin.dao.TeacherDao">
     <select id="findAll" resultType="Teacher">
-        select * from teacher;
+        select *
+        from teacher;
     </select>
-    <insert id="addTeacher" parameterType="Teacher">
-        insert into teacher(t_name,t_password)
-        values(#{t_name},#{t_password});
+    <select id="teacherLogin" resultType="Teacher" parameterType="String">
+        SELECT *
+        FROM teacher
+        WHERE t_name = #{name}
+          AND t_password = #{password}
+    </select>
+    <insert id="addTeacher" parameterType="Teacher" parameterMap="String">
+        INSERT INTO teacher(t_name, t_password)
+        VALUES (#{t_name}, #{t_password});
     </insert>
     <delete id="deleteTeacher" parameterType="Integer">
-        delete from teacher where t_id = #{id};
+        delete
+        from teacher
+        where t_id = #{id};
     </delete>
     <update id="updateTeacher" parameterType="Teacher">
         update teacher
-        set t_name=#{t_name},t_password=#{t_password},s_count=#{s_count}
-        where t_id  = #{t_id};
+        set t_name=#{t_name},
+            t_password=#{t_password},
+            s_count=#{s_count}
+        where t_id = #{t_id};
     </update>
     <select id="findTeacherById" parameterType="Integer" resultType="Teacher">
-        select * from teacher where t_id = #{id};
+        select *
+        from teacher
+        where t_id = #{id};
     </select>
 
     <update id="addScount" parameterType="Integer">
-        update teacher set s_count = (s_count+1)
+        update teacher
+        set s_count = (s_count + 1)
         where t_id = #{id};
     </update>
 
