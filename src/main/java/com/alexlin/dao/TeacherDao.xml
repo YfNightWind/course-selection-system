@@ -11,9 +11,9 @@
         WHERE t_name = #{name}
           AND t_password = #{password}
     </select>
-    <insert id="addTeacher" parameterType="Teacher" parameterMap="String">
+    <insert id="addTeacher" parameterType="Teacher">
         INSERT INTO teacher(t_name, t_password)
-        VALUES (#{t_name}, #{t_password});
+        VALUES (#{name}, #{password});
     </insert>
     <delete id="deleteTeacher" parameterType="Integer">
         delete
