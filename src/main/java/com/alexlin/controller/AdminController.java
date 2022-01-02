@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -38,6 +40,9 @@ public class AdminController {
         }
     }
 
+    // =================================================================================================
+    // =======================================学生相关===================================================
+    // =================================================================================================
     // 管理员更新学生
     @PostMapping("/updateStudent")
     @ResponseBody
@@ -48,5 +53,52 @@ public class AdminController {
         } else {
             return new ReturnContent(true, "更新成功！", "");
         }
+    }
+
+    // 管理员删除学生
+    @DeleteMapping("/deleteStudent")
+    @ResponseBody
+    public ReturnContent deleteStudent(@RequestParam(value = "number", defaultValue = "-1") int number) {
+
+        int rows = studentService.deleteStudent(number);
+
+        if (number == -1) {
+            return new ReturnContent(false, "内容必须填写", "");
+        }
+
+        if (rows > 0) {
+            return new ReturnContent(true, "删除成功！", "");
+        } else {
+            return new ReturnContent(false, "删除失败！", "");
+        }
+    }
+
+    // 管理员获取所有学生的信息
+    @GetMapping("/getAllStudent")
+    @ResponseBody
+    public ReturnContent getAllStudent() {
+        List<Student> student = studentService.findAll();
+        return new ReturnContent(true, "请求成功", student);
+    }
+
+    // 管理员添加学生
+    @PostMapping("/addStudent")
+    @ResponseBody
+    public ReturnContent addStudent(@RequestParam(value = "name", defaultValue = "") String name,
+                                    @RequestParam(value = "password", defaultValue = "") String password,
+                                    @RequestParam(value = "studentNumber", defaultValue = "") String studentNumber) {
+
+        int rows = studentService.addStudent(name, password, studentNumber);
+
+        if (name.equals("") || password.equals("") || studentNumber.equals("")) {
+            return new ReturnContent(false, "参数必须填写！", "");
+        }
+
+        if (rows > 0) {
+            return new ReturnContent(true, "添加成功", "");
+        } else {
+            return new ReturnContent(false, "添加失败", "");
+        }
+
     }
 }

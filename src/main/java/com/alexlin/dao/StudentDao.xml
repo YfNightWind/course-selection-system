@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.alexlin.dao.StudentDao">
+    <!-- 获得所有学生-->
     <select id="findAll" resultType="Student">
         SELECT *
         FROM student
@@ -24,10 +25,11 @@
         FROM student
         WHERE s_num = #{studentNumber}
     </select>
+    <!-- 删除学生-->
     <delete id="deleteStudent" parameterType="Integer">
         delete
         from student
-        where s_id = #{id};
+        where s_num = #{number};
     </delete>
     <!-- 更新学生-->
     <update id="updateStudent" parameterType="Student">

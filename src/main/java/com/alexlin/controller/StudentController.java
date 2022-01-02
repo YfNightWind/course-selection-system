@@ -13,15 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class StudentController {
     @Autowired
     private StudentService studentService;
-
-    @GetMapping("/findAll")
-    public ModelAndView findAll() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
-        modelAndView.addObject("list", studentService.findAll());
-        return modelAndView;
-    }
-
     // 学生登录
     @PostMapping("/login")
     @ResponseBody
