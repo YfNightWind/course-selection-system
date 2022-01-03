@@ -32,8 +32,8 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public int deleteTeacher(int s_id) {
-        return teacherDao.deleteTeacher(s_id);
+    public int deleteTeacher(int id) {
+        return teacherDao.deleteTeacher(id);
     }
 
     @Override

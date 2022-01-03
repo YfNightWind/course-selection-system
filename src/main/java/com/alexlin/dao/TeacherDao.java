@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface TeacherDao {
 
+    // 获得教师所有信息
     List<Teacher> findAll();
 
     // 教师登录
@@ -18,8 +19,10 @@ public interface TeacherDao {
     int addTeacher(@Param("name") String name,
                    @Param("password") String password);
 
-    int deleteTeacher(int s_id);
+    // 删除教师
+    int deleteTeacher(@Param("id") int id);
 
+    // 更新教师
     int updateTeacher(Teacher teacher);
 
     Teacher findTeacherById(int id);

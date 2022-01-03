@@ -2,8 +2,10 @@ package com.alexlin.controller;
 
 import com.alexlin.model.Admin;
 import com.alexlin.model.Student;
+import com.alexlin.model.Teacher;
 import com.alexlin.service.AdminService;
 import com.alexlin.service.StudentService;
+import com.alexlin.service.TeacherService;
 import com.alexlin.utils.ReturnContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class AdminController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private TeacherService teacherService;
 
     // 管理员登录
     @PostMapping("/login")
@@ -43,6 +48,7 @@ public class AdminController {
     // =================================================================================================
     // =======================================学生相关===================================================
     // =================================================================================================
+
     // 管理员更新学生
     @PostMapping("/updateStudent")
     @ResponseBody
@@ -99,6 +105,65 @@ public class AdminController {
         } else {
             return new ReturnContent(false, "添加失败", "");
         }
+    }
+    // =================================================================================================
+    // =======================================教师相关===================================================
+    // =================================================================================================
 
+    // 管理员获取所有教师的信息
+    @GetMapping("/getAllTeacher")
+    @ResponseBody
+    public ReturnContent getAllTeacher() {
+        List<Teacher> teachers = teacherService.findAll();
+        return new ReturnContent(true, "请求成功！", teachers);
+    }
+
+    // 管理员添加教师
+    @PostMapping("/addTeacher")
+    @ResponseBody
+    public ReturnContent addTeacher(@RequestParam(value = "name", defaultValue = "") String name,
+                                    @RequestParam(value = "password", defaultValue = "") String password) {
+
+        if (name.equals("") || password.equals("")) {
+            return new ReturnContent(false, "参数必须填写！", "");
+        }
+
+        int rows = teacherService.addTeacher(name, password);
+
+        if (rows > 0) {
+            return new ReturnContent(true, "添加成功", "");
+        } else {
+            return new ReturnContent(false, "添加失败", "");
+        }
+    }
+
+    // 管理员删除老师
+    @DeleteMapping("/deleteTeacher")
+    @ResponseBody
+    public ReturnContent deleteTeacher(@RequestParam(value = "id", defaultValue = "-1") int id) {
+
+        int rows = teacherService.deleteTeacher(id);
+
+        if (id == -1) {
+            return new ReturnContent(false, "内容必须填写", "");
+        }
+
+        if (rows > 0) {
+            return new ReturnContent(true, "删除成功！", "");
+        } else {
+            return new ReturnContent(false, "删除失败！", "");
+        }
+    }
+
+    // 管理员更新老师
+    @PostMapping("/updateTeacher")
+    @ResponseBody
+    public ReturnContent updateTeacher(Teacher teacher) {
+
+        if (teacherService.updateTeacher(teacher) == 0) {
+            return new ReturnContent(false, "更新失败！", "");
+        } else {
+            return new ReturnContent(true, "更新成功！", "");
+        }
     }
 }
