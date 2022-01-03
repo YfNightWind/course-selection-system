@@ -166,4 +166,19 @@ public class AdminController {
             return new ReturnContent(true, "更新成功！", "");
         }
     }
+
+    // =================================================================================================
+    // =======================================系统参数设定================================================
+    // =================================================================================================
+
+    @PostMapping("/maxStudent")
+    @ResponseBody
+    public ReturnContent maxStudentNumber(Teacher teacher) {
+
+        if (teacherService.maxStudentNumber(teacher) == 0) {
+            return new ReturnContent(false, "设置失败！", "");
+        } else {
+            return new ReturnContent(true, "设置成功！", "");
+        }
+    }
 }

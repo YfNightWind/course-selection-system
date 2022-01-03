@@ -25,6 +25,9 @@ public interface TeacherDao {
     // 更新教师
     int updateTeacher(Teacher teacher);
 
+    // 设置老师可选的最大学生数
+    int maxStudentNumber(Teacher teacher);
+
     Teacher findTeacherById(int id);
 
     int addScount(int t_id);

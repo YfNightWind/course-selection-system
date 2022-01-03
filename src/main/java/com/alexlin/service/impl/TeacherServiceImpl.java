@@ -1,6 +1,5 @@
 package com.alexlin.service.impl;
 
-import com.alexlin.dao.StudentDao;
 import com.alexlin.dao.TeacherDao;
 import com.alexlin.model.Teacher;
 import com.alexlin.service.TeacherService;
@@ -39,6 +38,11 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public int updateTeacher(Teacher teacher) {
         return teacherDao.updateTeacher(teacher);
+    }
+
+    @Override
+    public int maxStudentNumber(Teacher teacher) {
+        return teacherDao.maxStudentNumber(teacher);
     }
 
     @Override

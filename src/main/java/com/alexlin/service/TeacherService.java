@@ -16,9 +16,14 @@ public interface TeacherService {
     // 教师注册
     int addTeacher(String name, String password);
 
+    // 删除老师
     int deleteTeacher(int id);
 
+    // 更新老师
     int updateTeacher(Teacher teacher);
+
+    // 设置老师可选的最大学生数
+    int maxStudentNumber(Teacher teacher);
 
     Teacher findTeacherById(int t_id);
 }
