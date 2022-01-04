@@ -90,6 +90,34 @@
         </set>
         where s_id = #{s_id}
     </update>
+
+    <!-- 一志愿落选-->
+    <update id="setV1Out" parameterType="Student">
+        update student
+        <set>
+            state = "V1Out"
+        </set>
+        where s_id = #{s_id}
+    </update>
+
+    <!-- 二志愿落选-->
+    <update id="setV2Out" parameterType="Student">
+        update student
+        <set>
+            state = "V2Out"
+        </set>
+        where s_id = #{s_id}
+    </update>
+
+    <!-- 三志愿落选-->
+    <update id="setV3Out" parameterType="Student">
+        update student
+        <set>
+            state = "V3Out"
+        </set>
+        where s_id = #{s_id}
+    </update>
+
     <!--设置学生状态-->
     <update id="setState" parameterType="Student">
         update student

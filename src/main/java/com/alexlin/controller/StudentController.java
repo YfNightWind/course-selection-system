@@ -122,5 +122,53 @@ public class StudentController {
         }
     }
 
+    // 一志愿落选
+    @PostMapping("/v1Out")
+    @ResponseBody
+    public ReturnContent setV1Out(@RequestParam(value = "s_id", defaultValue = "-1") int s_id) {
+
+        if (s_id == -1) {
+            return new ReturnContent(false, "参数必须填写", "");
+        }
+
+        if (studentService.setV1Out(s_id) == 0) {
+            return new ReturnContent(false, "状态设置失败", "");
+        } else {
+            return new ReturnContent(true, "设置状态成功", "");
+        }
+    }
+
+    // 二志愿落选
+    @PostMapping("/v2Out")
+    @ResponseBody
+    public ReturnContent setV2Out(@RequestParam(value = "s_id", defaultValue = "-1") int s_id) {
+
+        if (s_id == -1) {
+            return new ReturnContent(false, "参数必须填写", "");
+        }
+
+        if (studentService.setV2Out(s_id) == 0) {
+            return new ReturnContent(false, "状态设置失败", "");
+        } else {
+            return new ReturnContent(true, "设置状态成功", "");
+        }
+    }
+
+    // 三志愿落选
+    @PostMapping("/v3Out")
+    @ResponseBody
+    public ReturnContent setV3Out(@RequestParam(value = "s_id", defaultValue = "-1") int s_id) {
+
+        if (s_id == -1) {
+            return new ReturnContent(false, "参数必须填写", "");
+        }
+
+        if (studentService.setV3Out(s_id) == 0) {
+            return new ReturnContent(false, "状态设置失败", "");
+        } else {
+            return new ReturnContent(true, "设置状态成功", "");
+        }
+    }
+
 }
 

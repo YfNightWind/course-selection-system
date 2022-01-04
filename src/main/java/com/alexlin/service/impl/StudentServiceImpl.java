@@ -69,12 +69,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student findStudentById(int id) {
-        return studentDao.findStudentById(id);
-    }
-
-
-    @Override
     public void setTeacher(int s_id, int t_id) {
         Student student = new Student();
         student.setState("Finish");
@@ -111,28 +105,18 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void setV1Out(int s_id) {
-        Student student = new Student();
-        student.setState("V1Out");
-        student.setS_id(s_id);
-        studentDao.setState(student);
+    public int setV1Out(int s_id) {
+        return studentDao.setV1Out(s_id);
     }
 
     @Override
-    public void setV2Out(int s_id) {
-        Student student = new Student();
-        student.setState("V2Out");
-        student.setS_id(s_id);
-        studentDao.setState(student);
+    public int setV2Out(int s_id) {
+        return studentDao.setV2Out(s_id);
     }
 
     @Override
-    public void setV3Out(int s_id) {
-        Student student = new Student();
-        student.setState("V3Out");
-        student.setS_id(s_id);
-        studentDao.setState(student);
+    public int setV3Out(int s_id) {
+        return studentDao.setV3Out(s_id);
     }
-
 
 }

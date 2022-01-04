@@ -36,8 +36,6 @@ public interface StudentService {
     // 第三志愿
     List<Student> matchV3(int teacherId);
 
-    Student findStudentById(int s_id);
-
     //学生导师确定，更改学生表导师号字段，state字段，导师表s_count字段
     void setTeacher(int s_id, int t_id);
 
@@ -47,9 +45,12 @@ public interface StudentService {
     //设置学生状态
     void setReady(int s_id);
 
-    void setV1Out(int s_id);
+    // 一志愿落选
+    int setV1Out(int s_id);
 
-    void setV2Out(int s_id);
+    // 二志愿落选
+    int setV2Out(int s_id);
 
-    void setV3Out(int s_id);
+    // 三志愿落选
+    int setV3Out(int s_id);
 }

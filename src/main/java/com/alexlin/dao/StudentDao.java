@@ -43,6 +43,14 @@ public interface StudentDao {
     int chosen(@Param("s_id") int s_id,
                    @Param("t_id") int t_id);
 
+    // 一志愿落选
+    int setV1Out(@Param("s_id") int s_id);
+
+    // 二志愿落选
+    int setV2Out(@Param("s_id") int s_id);
+
+    // 三志愿落选
+    int setV3Out(@Param("s_id") int s_id);
 
     void setState(Student student);
 }
