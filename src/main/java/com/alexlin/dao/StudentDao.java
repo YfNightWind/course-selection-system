@@ -27,9 +27,10 @@ public interface StudentDao {
     // 更新学生
     int updateStudent(Student student);
 
-    Student findStudentById(int id);
-
+    // 学生选老师
     int setTeacher(Student student);
+
+    Student findStudentById(int id);
 
     void setState(Student student);
 }

@@ -49,6 +49,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public int setTeacher(Student student) {
+        return studentDao.setTeacher(student);
+    }
+
+    @Override
     public Student findStudentById(int id) {
         return studentDao.findStudentById(id);
     }

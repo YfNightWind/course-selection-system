@@ -45,15 +45,19 @@
     <select id="findStudentById" parameterType="Integer" resultType="Student">
         select *
         from student
-        where s_id = #{id};
+        where s_id = #{id}
     </select>
 
-    <!--设置学生的导师号字段-->
+    <!-- 学生选老师-->
     <update id="setTeacher" parameterType="Student">
         update student
-        set t_id=#{t_id},
-            state=#{state}
-        where s_id = #{s_id};
+        <set>
+            <if test="v1 != null and v1 !=''">v1 = #{v1},</if>
+            <if test="v2 != null and v2 !=''">v2 = #{v2},</if>
+            <if test="v3 != null and v3 !=''">v3 = #{v3},</if>
+            state = "ready"
+        </set>
+        where s_id = #{s_id}
     </update>
     <!--设置学生状态-->
     <update id="setState" parameterType="Student">
