@@ -31,6 +31,11 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    public int adminAddTeacher(String name, String password, int count, int max) {
+        return teacherDao.adminAddTeacher(name, password, count, max);
+    }
+
+    @Override
     public int deleteTeacher(int id) {
         return teacherDao.deleteTeacher(id);
     }

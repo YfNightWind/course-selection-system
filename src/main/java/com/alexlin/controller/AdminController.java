@@ -138,7 +138,9 @@ public class AdminController {
     @PostMapping("/addTeacher")
     @ResponseBody
     public ReturnContent addTeacher(@RequestParam(value = "name", defaultValue = "") String name,
-                                    @RequestParam(value = "password", defaultValue = "") String password) {
+                                    @RequestParam(value = "password", defaultValue = "") String password,
+                                    @RequestParam(value = "count", defaultValue = "0") int count,
+                                    @RequestParam(value = "max", defaultValue = "10") int max) {
 
         if (name.equals("") || password.equals("")) {
             return new ReturnContent(false, "参数必须填写！", "");

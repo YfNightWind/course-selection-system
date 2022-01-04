@@ -16,6 +16,9 @@ public interface TeacherService {
     // 教师注册
     int addTeacher(String name, String password);
 
+    // 管理员添加教师
+    int adminAddTeacher(String name, String password, int count, int max);
+
     // 删除老师
     int deleteTeacher(int id);
 
