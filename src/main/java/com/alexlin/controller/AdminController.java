@@ -26,19 +26,22 @@ public class AdminController {
 
     @Autowired
     private TeacherService teacherService;
+
     @GetMapping("/showStudent")
-    public String showStudent(ModelMap model){
+    public String showStudent(ModelMap model) {
         System.out.println("here is amdin showStudent");
-        model.addAttribute("demo","demo");
+        model.addAttribute("demo", "demo");
         return "admin/showStudent";
     }
+
     @GetMapping("/showTeacher")
-    public String showTeacher(ModelMap model){
+    public String showTeacher(ModelMap model) {
         System.out.println("here is amdin showStudent--------------------------");
         List<Teacher> list = teacherService.findAll();
-        model.addAttribute("list",list);
+        model.addAttribute("list", list);
         return "admin/showTeacher";
     }
+
     // 管理员登录
     @PostMapping("/login")
     @ResponseBody
