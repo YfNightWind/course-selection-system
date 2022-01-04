@@ -30,7 +30,19 @@ public interface StudentDao {
     // 学生选老师
     int setTeacher(Student student);
 
-    Student findStudentById(int id);
+    // 第一志愿
+    List<Student> matchV1(@Param("teacherId") int teacherId);
+
+    // 第二志愿
+    List<Student> matchV2(@Param("teacherId") int teacherId);
+
+    // 第三志愿
+    List<Student> matchV3(@Param("teacherId") int teacherId);
+
+    // 被老师选上
+    int chosen(@Param("s_id") int s_id,
+                   @Param("t_id") int t_id);
+
 
     void setState(Student student);
 }

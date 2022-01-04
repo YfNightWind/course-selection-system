@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/student")
 public class StudentController {
@@ -63,6 +65,60 @@ public class StudentController {
             return new ReturnContent(false, "选择失败！", "");
         } else {
             return new ReturnContent(true, "选择成功！", student);
+        }
+    }
+
+    // 第一志愿
+    @PostMapping("/matchV1")
+    @ResponseBody
+    public ReturnContent matchV1(@RequestParam(value = "teacherId", defaultValue = "-1") int teacherId) {
+
+        if (teacherId == -1) {
+            return new ReturnContent(false, "参数必须填写", "");
+        }
+
+        List<Student> student = studentService.matchV1(teacherId);
+
+        if (student == null) {
+            return new ReturnContent(false, "无学生", "");
+        } else {
+            return new ReturnContent(true, "第一志愿学生如下", student);
+        }
+    }
+
+    // 第二志愿
+    @PostMapping("/matchV2")
+    @ResponseBody
+    public ReturnContent matchV2(@RequestParam(value = "teacherId", defaultValue = "-1") int teacherId) {
+
+        if (teacherId == -1) {
+            return new ReturnContent(false, "参数必须填写", "");
+        }
+
+        List<Student> student = studentService.matchV1(teacherId);
+
+        if (student == null) {
+            return new ReturnContent(false, "无学生", "");
+        } else {
+            return new ReturnContent(true, "第二志愿学生如下", student);
+        }
+    }
+
+    // 第三志愿
+    @PostMapping("/matchV3")
+    @ResponseBody
+    public ReturnContent matchV3(@RequestParam(value = "teacherId", defaultValue = "-1") int teacherId) {
+
+        if (teacherId == -1) {
+            return new ReturnContent(false, "参数必须填写", "");
+        }
+
+        List<Student> student = studentService.matchV1(teacherId);
+
+        if (student == null) {
+            return new ReturnContent(false, "无学生", "");
+        } else {
+            return new ReturnContent(true, "第三志愿学生如下", student);
         }
     }
 

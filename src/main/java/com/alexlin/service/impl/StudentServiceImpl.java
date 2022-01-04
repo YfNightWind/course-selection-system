@@ -54,6 +54,21 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public List<Student> matchV1(int teacherId) {
+        return studentDao.matchV1(teacherId);
+    }
+
+    @Override
+    public List<Student> matchV2(int teacherId) {
+        return studentDao.matchV2(teacherId);
+    }
+
+    @Override
+    public List<Student> matchV3(int teacherId) {
+        return studentDao.matchV3(teacherId);
+    }
+
+    @Override
     public Student findStudentById(int id) {
         return studentDao.findStudentById(id);
     }

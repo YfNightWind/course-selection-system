@@ -59,6 +59,37 @@
         </set>
         where s_id = #{s_id}
     </update>
+
+    <!-- 第一志愿-->
+    <select id="matchV1" parameterType="int" resultType="Student">
+        select *
+        from student
+        where v1 = #{teacherId}
+    </select>
+
+    <!-- 第二志愿-->
+    <select id="matchV2" parameterType="int" resultType="Student">
+        select *
+        from student
+        where v2 = #{teacherId}
+    </select>
+
+    <!-- 第三志愿-->
+    <select id="matchV3" parameterType="int" resultType="Student">
+        select *
+        from student
+        where v3 = #{teacherId}
+    </select>
+
+    <!-- 被老师选上了-->
+    <update id="chosen" parameterType="Student">
+        update student
+        <set>
+            <if test="t_id != null and t_id !=''">t_id = #{t_id},</if>
+            state = "finish"
+        </set>
+        where s_id = #{s_id}
+    </update>
     <!--设置学生状态-->
     <update id="setState" parameterType="Student">
         update student

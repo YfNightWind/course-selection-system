@@ -4,6 +4,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * 这里写跨域便于测试的时候使用
+ */
+
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
 

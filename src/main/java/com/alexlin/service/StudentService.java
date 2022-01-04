@@ -1,6 +1,7 @@
 package com.alexlin.service;
 
 import com.alexlin.model.Student;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,6 +26,15 @@ public interface StudentService {
 
     // 学生选老师
     int setTeacher(Student student);
+
+    // 第一志愿
+    List<Student> matchV1(int teacherId);
+
+    // 第二志愿
+    List<Student> matchV2(int teacherId);
+
+    // 第三志愿
+    List<Student> matchV3(int teacherId);
 
     Student findStudentById(int s_id);
 

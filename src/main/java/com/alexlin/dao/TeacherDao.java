@@ -19,6 +19,12 @@ public interface TeacherDao {
     int addTeacher(@Param("name") String name,
                    @Param("password") String password);
 
+    // 管理员添加教师
+    int adminAddTeacher(@Param("name") String name,
+                        @Param("password") String password,
+                        @Param("count") int count,
+                        @Param("max") int max);
+
     // 删除教师
     int deleteTeacher(@Param("id") int id);
 
