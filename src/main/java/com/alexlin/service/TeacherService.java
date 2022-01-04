@@ -1,7 +1,9 @@
 package com.alexlin.service;
 
 
+import com.alexlin.model.Student;
 import com.alexlin.model.Teacher;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +29,9 @@ public interface TeacherService {
 
     // 设置老师可选的最大学生数
     int maxStudentNumber(Teacher teacher);
+
+    // 老师选择了该学生
+    int chosen(int s_id, int t_id);
 
     Teacher findTeacherById(int t_id);
 }
