@@ -44,3 +44,36 @@ function formPost(url,data,callback){
         }
     }
 }
+function formDelete(){
+    var xhr =new XMLHttpRequest();
+    xhr.open("delete",url,true);
+    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    //拼装url
+    var dataArr = Object.entries(data);
+    formdata=""
+    dataArr.forEach((item,index)=>{
+        if(index!=0){
+            formdata+="&"+item[0]+"="+item[1];
+        }else{
+            formdata+=item[0]+"="+item[1];
+        }
+    })
+
+    xhr.send(formdata);
+    xhr.onreadystatechange=()=>{
+        if(xhr.readyState==4){
+            if((xhr.status>=200&&xhr.status<300)||xhr.status==304){
+                resultdata =JSON.parse(xhr.responseText);
+                callback(resultdata);
+            }else{
+                alert("Request was unsuccessful:"+xhr.status);
+            }
+        }
+    }
+}
+//刷新页面
+function flush(){
+    location.reload(true);
+}
+
+

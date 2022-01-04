@@ -1,0 +1,45 @@
+.main {
+    text-align: center;
+    width: 990px;
+    margin: auto;
+}
+
+.search input {
+    height: 24px;
+    width: 200px;
+}
+
+.search button {
+    background-color: #71c1ff;
+    width: 50px;
+    height: 30px;
+    border-radius: 3px;
+    border: none;
+    color: white;
+}
+
+.table .title,
+.table .tr {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+}
+
+.table .title {
+    font-weight: bold;
+}
+
+.table .th,
+.table .td {
+    flex: 1;
+    text-align: center;
+}
+
+.tr-normal .td {
+    border: none;
+    outline: none;
+}
+
+.hide {
+    display: none;
+}

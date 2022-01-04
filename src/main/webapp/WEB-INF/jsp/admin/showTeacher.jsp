@@ -14,7 +14,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理教师</title>
-    <link rel="stylesheet" href="/css/managerStudent.css">
+    <link rel="stylesheet" href="/css/manageStudent.css">
+    <script src="/js/common.js"></script>
 </head>
 <body>
 <div class="main">
@@ -23,7 +24,9 @@
             教师管理
         </h3>
         <div class="search">
-            <input type="text" placeholder="请输入查询条件"><button>查询</button>
+            <button onclick="add()">+</button>
+            <input type="text" placeholder="请输入查询条件">
+            <button>查询</button>
         </div>
     </div>
     <div class="table">
@@ -32,19 +35,30 @@
             <div class="th">密码</div>
             <div class="th">当前指导学生数</div>
             <div class="th">指导学生总名额</div>
-            <div class="th">修改</div>
-            <div class="th">删除</div>
+            <div class="th">操作</div>
         </div>
+        <div class="main-table">
         <c:forEach items="${list}" var="teacher">
-            <div class="tr">
-                <div class="td">${teacher.t_name}</div>
-                <div class="td">${teacher.t_password}</div>
-                <div class="td">${teacher.s_count}</div>
-                <div class="td">${teacher.s_max}</div>
-                <div class="td"><button onClick="location.href='updateTeacher?id=${teacher.t_id}'">修改</button></div>
-                <div class="td"><button>删除</button></div>
+            <div class="tr tr-normal">
+                <input readonly id="username" class="td" value="${teacher.t_name}"></input>
+                <input readonly id="password" class="td" value="${teacher.t_password}"></input>
+                <input readonly id="nowCount" class="td" value="${teacher.s_count}"></input>
+                <input readonly id="allCount" class="td" value="${teacher.s_max}"></input>
+                <div class="td td-normal-option">
+                    <button class="modify">修改</button>
+                    <button class="delete">删除</button>
+                </div>
+                <div class="td hide td-modify-option">
+                    <button class="submit">提交</button>
+                    <button class="cancel">取消</button>
+                </div>
+                <input id="userid" style="display: none;" value="${teacher.t_id}"></input>
             </div>
+
+
         </c:forEach>
+
+        </div>
 
         <div class="tfooter">
             <div class="amount">当前<span class="current_page">1</span>页, 总
@@ -60,5 +74,7 @@
     </div>
 
 </div>
+
 </body>
+<script src="/js/manage.js"></script>
 </html>
