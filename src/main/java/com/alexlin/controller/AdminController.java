@@ -9,6 +9,7 @@ import com.alexlin.service.TeacherService;
 import com.alexlin.utils.ReturnContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +26,19 @@ public class AdminController {
 
     @Autowired
     private TeacherService teacherService;
-
+    @GetMapping("/showStudent")
+    public String showStudent(ModelMap model){
+        System.out.println("here is amdin showStudent");
+        model.addAttribute("demo","demo");
+        return "admin/showStudent";
+    }
+    @GetMapping("/showTeacher")
+    public String showTeacher(ModelMap model){
+        System.out.println("here is amdin showStudent--------------------------");
+        List<Teacher> list = teacherService.findAll();
+        model.addAttribute("list",list);
+        return "admin/showTeacher";
+    }
     // 管理员登录
     @PostMapping("/login")
     @ResponseBody
