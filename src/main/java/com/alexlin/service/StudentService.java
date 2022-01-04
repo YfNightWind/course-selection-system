@@ -23,6 +23,9 @@ public interface StudentService {
     // 更新学生
     int updateStudent(Student student);
 
+    // 学生选老师
+    int setTeacher(Student student);
+
     Student findStudentById(int s_id);
 
     //学生导师确定，更改学生表导师号字段，state字段，导师表s_count字段

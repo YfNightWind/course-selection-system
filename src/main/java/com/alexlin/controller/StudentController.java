@@ -6,13 +6,13 @@ import com.alexlin.utils.ReturnContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/student")
 public class StudentController {
     @Autowired
     private StudentService studentService;
+
     // 学生登录
     @PostMapping("/login")
     @ResponseBody
@@ -50,6 +50,20 @@ public class StudentController {
         }
 
         return new ReturnContent(true, "注册成功！", "");
+    }
+
+    // 学生选老师
+    @PostMapping("/setTeacher")
+    @ResponseBody
+    public ReturnContent setTeacher(Student student) {
+        /*
+          应该传递四个参数，v1，v2，v3和学生的id，同时设置状态为ready
+         */
+        if (studentService.setTeacher(student) == 0) {
+            return new ReturnContent(false, "选择失败！", "");
+        } else {
+            return new ReturnContent(true, "选择成功！", student);
+        }
     }
 
 }
