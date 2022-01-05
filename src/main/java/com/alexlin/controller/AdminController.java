@@ -61,6 +61,31 @@ public class AdminController {
         }
     }
 
+    // 管理员获取date
+    @GetMapping("/getDate")
+    @ResponseBody
+    public ReturnContent getDate() {
+        return new ReturnContent(true, "成功", adminService.getDate().getDate());
+    }
+
+    // 管理员修改date
+    @PostMapping("/modifyDate")
+    @ResponseBody
+    public ReturnContent modifyDate(@RequestParam(value = "date", defaultValue = "-2") int date) {
+
+        if (date == -2) {
+            return new ReturnContent(false, "参数必须填写", "");
+        }
+
+        int row = adminService.modifyDate(date);
+
+        if (row == 0) {
+            return new ReturnContent(false, "修改失败", "");
+        } else {
+            return new ReturnContent(true, "修改成功！", "");
+        }
+    }
+
     // =================================================================================================
     // =======================================学生相关===================================================
     // =================================================================================================

@@ -16,4 +16,14 @@ public class AdminServiceImpl implements AdminService {
         return adminDao.adminLogin(name, password);
     }
 
+    @Override
+    public Admin getDate() {
+        return adminDao.getDate();
+    }
+
+    @Override
+    public int modifyDate(int date) {
+        return adminDao.modifyDate(date);
+    }
+
 }
