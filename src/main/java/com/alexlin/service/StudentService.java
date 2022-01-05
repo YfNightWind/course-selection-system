@@ -10,7 +10,7 @@ public interface StudentService {
     List<Student> findAll();
 
     // 学生登录
-    Student studentLogin(String name, String password);
+    Student studentLogin(String number, String password);
 
     // 学生注册
     int addStudent(String name, String password, String studentNumber);

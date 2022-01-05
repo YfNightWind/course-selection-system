@@ -12,7 +12,7 @@
     <select id="teacherLogin" resultType="Teacher" parameterType="String">
         SELECT *
         FROM teacher
-        WHERE t_name = #{name}
+        WHERE t_id = #{id}
           AND t_password = #{password}
     </select>
 

@@ -1,7 +1,5 @@
 package com.alexlin.controller;
 
-import com.alexlin.dao.TeacherDao;
-import com.alexlin.model.Student;
 import com.alexlin.model.Teacher;
 import com.alexlin.service.TeacherService;
 import com.alexlin.utils.ReturnContent;
@@ -21,12 +19,12 @@ public class TeacherController {
     // 教师登录
     @PostMapping("/login")
     @ResponseBody
-    public ReturnContent teacherLogin(@RequestParam(value = "name", defaultValue = "") String name,
+    public ReturnContent teacherLogin(@RequestParam(value = "id", defaultValue = "") String id,
                                       @RequestParam(value = "password", defaultValue = "") String password) {
 
-        Teacher teacher = teacherService.teacherLogin(name, password);
+        Teacher teacher = teacherService.teacherLogin(id, password);
 
-        if (name.equals("") || password.equals("")) {
+        if (id.equals("") || password.equals("")) {
             return new ReturnContent(false, "参数必须填写！", "");
         }
 

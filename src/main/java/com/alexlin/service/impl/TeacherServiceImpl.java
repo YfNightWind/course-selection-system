@@ -2,7 +2,6 @@ package com.alexlin.service.impl;
 
 import com.alexlin.dao.StudentDao;
 import com.alexlin.dao.TeacherDao;
-import com.alexlin.model.Student;
 import com.alexlin.model.Teacher;
 import com.alexlin.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,8 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher teacherLogin(String name, String password) {
-        return teacherDao.teacherLogin(name, password);
+    public Teacher teacherLogin(String id, String password) {
+        return teacherDao.teacherLogin(id, password);
     }
 
     @Override

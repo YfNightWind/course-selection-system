@@ -10,7 +10,7 @@ public interface StudentDao {
     List<Student> findAll();
 
     // 学生登录
-    Student studentLogin(@Param("name") String name,
+    Student studentLogin(@Param("number") String number,
                          @Param("password") String password);
 
     // 学生注册

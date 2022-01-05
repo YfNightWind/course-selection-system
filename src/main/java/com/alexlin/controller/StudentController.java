@@ -18,12 +18,12 @@ public class StudentController {
     // 学生登录
     @PostMapping("/login")
     @ResponseBody
-    public ReturnContent login(@RequestParam(value = "name", defaultValue = "") String name,
+    public ReturnContent login(@RequestParam(value = "number", defaultValue = "") String number,
                                @RequestParam(value = "password", defaultValue = "") String password) {
 
-        Student student = studentService.studentLogin(name, password);
+        Student student = studentService.studentLogin(number, password);
 
-        if (name.equals("") || password.equals("")) {
+        if (number.equals("") || password.equals("")) {
             return new ReturnContent(false, "用户名密码不能为空！", "");
         }
 

@@ -24,8 +24,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-    public Student studentLogin(String name, String password) {
-        return studentDao.studentLogin(name, password);
+    public Student studentLogin(String number, String password) {
+        return studentDao.studentLogin(number, password);
     }
 
     @Override

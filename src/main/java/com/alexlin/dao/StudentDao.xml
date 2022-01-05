@@ -11,7 +11,7 @@
     <select id="studentLogin" resultType="Student" parameterType="String">
         SELECT *
         FROM student
-        WHERE s_name = #{name}
+        WHERE s_num = #{number}
           AND s_password = #{password}
     </select>
     <!-- 学生注册-->
