@@ -18,6 +18,7 @@
     <script src="/js/common.js"></script>
 </head>
 <body>
+<jsp:include page="top.jsp"></jsp:include>
 <div class="main">
     <div class="header">
         <h3 class="title">
@@ -60,7 +61,7 @@
 
         </div>
 
-        <div class="tfooter">
+<%--        <div class="tfooter">
             <div class="amount">当前<span class="current_page">1</span>页, 总
                 <span class="num_recoder">7</span>条记录
             </div>
@@ -70,11 +71,11 @@
                 <button class="num_page">2</button>
                 <button class="next">下一页</button>
             </div>
-        </div>
+        </div>--%>
     </div>
 
 </div>
 
 </body>
-<script src="/js/manage.js"></script>
+<script src="/js/manageTeacher.js"></script>
 </html>

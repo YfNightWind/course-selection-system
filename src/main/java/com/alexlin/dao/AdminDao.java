@@ -13,4 +13,5 @@ public interface AdminDao {
 
     // 管理员修改date
     int modifyDate(@Param("date") int date);
+
 }

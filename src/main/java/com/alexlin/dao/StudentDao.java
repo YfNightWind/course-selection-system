@@ -4,6 +4,7 @@ import com.alexlin.model.Student;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface StudentDao {
     // 获得所有学生
@@ -53,4 +54,11 @@ public interface StudentDao {
     int setV3Out(@Param("s_id") int s_id);
 
     void setState(Student student);
+    //通过名字得到学生的全部信息
+    int setAll(String state);
+    int setVOut(String VOut);
+    //设置导师
+    int setTid(Map map);
+    //得到所有未确定导师的学生
+    List<Student> getAllNotFinish();
 }

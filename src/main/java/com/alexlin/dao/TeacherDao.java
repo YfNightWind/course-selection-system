@@ -12,7 +12,7 @@ public interface TeacherDao {
     List<Teacher> findAll();
 
     // 教师登录
-    Teacher teacherLogin(@Param("id") String id,
+    Teacher teacherLogin(@Param("name") String name,
                          @Param("password") String password);
 
     // 教师注册

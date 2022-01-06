@@ -8,7 +8,9 @@ import com.alexlin.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -68,33 +70,7 @@ public class StudentServiceImpl implements StudentService {
         return studentDao.matchV3(teacherId);
     }
 
-    @Override
-    public void setTeacher(int s_id, int t_id) {
-        Student student = new Student();
-        student.setState("Finish");
-        student.setT_id(t_id);
-        student.setS_id(s_id);
-        studentDao.setTeacher(student);
-        teacherDao.addScount(t_id);
-    }
 
-    @Override
-    public int byElection(int s_id) {
-        int t_id = 0;
-        List<Teacher> teacherList = teacherDao.findAll();
-        for (Teacher teacher : teacherList) {
-            if (teacher.getS_count() < teacher.getS_max()) {
-                t_id = teacher.getT_id();
-                Student student = new Student();
-                student.setS_id(s_id);
-                student.setT_id(t_id);
-                //学生导师确定
-                setTeacher(s_id, t_id);
-                break;
-            }
-        }
-        return t_id;
-    }
 
     @Override
     public void setReady(int s_id) {
@@ -118,5 +94,16 @@ public class StudentServiceImpl implements StudentService {
     public int setV3Out(int s_id) {
         return studentDao.setV3Out(s_id);
     }
+
+    @Override
+    public int setTid(int t_id, int s_id) {
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("t_id",t_id);
+        map.put("s_id",s_id);
+        return studentDao.setTid(map);
+    }
+
+
+
 
 }

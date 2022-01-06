@@ -12,14 +12,14 @@
     <select id="teacherLogin" resultType="Teacher" parameterType="String">
         SELECT *
         FROM teacher
-        WHERE t_id = #{id}
+        WHERE t_name = #{name}
           AND t_password = #{password}
     </select>
 
     <!-- 教师注册-->
     <insert id="addTeacher" parameterType="Teacher">
-        INSERT INTO teacher(t_name, t_password)
-        VALUES (#{name}, #{password});
+        INSERT INTO teacher(t_name, t_password,s_count,s_max)
+        VALUES (#{name}, #{password},#{s_count},#{s_max});
     </insert>
 
     <!-- 管理员添加教师-->

@@ -12,62 +12,92 @@
 <head>
 
     <title>Title</title>
-    <script src="http://localhost:8080/js/common.js"></script>
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="/js/common.js"></script>
+    <title>登录</title>
 </head>
+
 <body>
+<h1>登录</h1>
+    <div class="container">
+        <div class="name"><input type="text" id="name" placeholder="请输入您的用户名"></div>
+        <div class="password"><input type="text" id="password"  placeholder="请输入您的密码"></div>
+        <div class="role">
+            <label class="checkbox-inline">
+                <input type="radio" name="role" value="管理员" checked>管理员
+            </label>
+            <label class="checkbox-inline">
+                <input  onclick="teacher()" type="radio" name="role" value="教师">教师
+            </label>
+            <label class="checkbox-inline">
+                <input checked onclick="student()" type="radio" name="role" value="学生">学生
+            </label>
+            <div class="submit">
+                <button type="submit" onclick="login()">登录</button>
+            </div>
+            <a href="register.jsp">点击注册</a>
+        </div>
 
-<form action = "student/login" method="post">
-    <input type="text"  name="name"> 姓名</input>
-    <input type="password" name="password" >密码</input>
-    <input type="submit" >提交</input>
-</form>
-
-<input type="text"  name="name" id="name"> 姓名</input>
-<input type="password" name="password" id="password" >密码</input>
-<input type="submit" onclick="demo()">提交demo</button>
-
-<button onclick="toform()">模拟form表单</button>
+    </div>
 
 </body>
 
+
 <script>
-    function demo(){
-        var url = 'http://localhost:8080/demo/login';
-        //数据的键要与model中类的属性一一对应
-        var data={
-            "s_name":document.getElementById("name").value,
-            "s_password":document.getElementById("password").value
-        }
-        post(url,data,function(result){
-            console.log(result);
-            console.log(result.code);
-            console.log(result.result.s_name);
 
-        });
-    }
-
-    function toform(){
-        // var url = 'http://localhost:8080/student/login';
-        // //数据的键要与model中类的属性一一对应
-        // var data={
-        //     "name":document.getElementById("name").value,
-        //     "password":document.getElementById("password").value
-        // }
-        // formPost(url,data,function(result){
-        //     alert(result);
-        //     console.log(result);
-        // });
-        var url = 'http://localhost:8080/student/login';
+    function  login(){
+        var notTeacher = true;
+        var roles = document.getElementsByName("role");
+        var role = "";
+        roles.forEach((rolebox)=>{
+            if(rolebox.checked){
+                role = rolebox.value;
+                console.log(role);
+            }
+        })
         var data={
-            "name":document.getElementById("name").value,
+            "number":document.getElementById("name").value,
             "password":document.getElementById("password").value
         }
-        formPost(url,data,function (result){
-            console.log(result);
-        })
+        var url = "";
+        var jumpUrl="";
+        if(role=="学生"){
+            url = "student/login";
+            jumpUrl = "student/selectTeacher?number="+data.number;
+        }else if(role=="管理员"){
+            data.name= data.number;
+            url = "admin/login";
+            jumpUrl = "admin/showTeacher";
+        }else if(role=="教师"){
+            notTeacher =false;
+            url = "teacher/login";
 
-        //location.href="url";
+            data.name = data.number;
+            formPost(url,data,function (result){
+                if(result.code){
+                    jumpUrl = "teacher/selectStudent?t_id="+result.result.t_id;
+                    location.href=jumpUrl;
+                }else{
+                    alert(result.msg);
+                }
+            })
+        }
+        //教师需要拿到返回的值中的id属性，所以要特殊对待
+        if(notTeacher){
+            formPost(url,data,function (result){
+                if(result.code){
+                    location.href=jumpUrl;
+                }else{
+                    alert(result.msg);
+                }
+            })
+        }
+
     }
+
+
+
+
 </script>
 
 <%--<script>--%>
@@ -121,34 +151,5 @@
 <%--    }--%>
 <%--</script>--%>
 
-<script>
-    var btn = document.getElementsByTagName('input')[2];
-    btn.onclick = function() {
-        console.log(1);
 
-        var xhr = new XMLHttpRequest();
-
-        // 这边做数据的呈现
-        var result = document.getElementById("result");
-        // 再去设置result的文本
-
-        xhr.open('POST', 'http://localhost:8080/student/login');
-
-        xhr.send();
-
-        console.log(xhr.response);
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    result.innerHTML = xhr.response;
-                    console.log(xhr.response);
-                    console.log(xhr.status);// 状态码
-
-
-                }
-            }
-        }
-    }
-</script>
 </html>

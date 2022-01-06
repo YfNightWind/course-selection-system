@@ -8,31 +8,27 @@ function init() {
 init();
 
 function trInit(tr) {
-    tr.addEventListener("click", function(e) {
+    tr.addEventListener("click", function (e) {
         var option = e.target.className
-            //打开更改操作界面
+        //打开更改操作界面
         if (option == "modify") {
             switchOption(tr);
 
         } else if (option == "submit") {
             //提交更改
-            var username = tr.querySelector("#username").value;
-            var password = tr.querySelector("#password").value;
-            var nowCount = tr.querySelector("#nowCount").value;
-            var allCount = tr.querySelector("#allCount").value;
-            var id = tr.querySelector("#userid").value;
+            var sNum = tr.querySelector("#s_num").value;
+            var sName = tr.querySelector("#s_name").value;
+            var password = tr.querySelector("#s_password").value;
             var obj = {
-                "t_name": username,
-                "t_password": password,
-                "s_count": nowCount,
-                "s_max": allCount,
-                "t_id":id
+                "s_num": sNum,
+                "s_name": sName,
+                "s_password": password
             }
-
-            formPost("/admin/updateTeacher",obj, (data)=>{
-                if(data.code){
+            console.log(obj);
+            post("updateStudent", obj, (data) => {
+                if (data.code) {
                     flush();
-                }else{
+                } else {
                     alert("更新失败");
                     switchOption();
                 }
@@ -40,15 +36,17 @@ function trInit(tr) {
             });
         } else if (option == "delete") {
             //删除学生
-            var userid = tr.querySelector("#userid").value;
 
-            id={
-                "id":userid
+            var sNum = tr.querySelector("#s_num").value;
+
+            data = {
+                "number": sNum
             }
-            formDelete("/admin/deleteTeacher",id,function (data){
-                if(data.code){
+            console.log(data);
+            formDelete("deleteStudent", data, function (data) {
+                if (data.code) {
                     flush();
-                }else{
+                } else {
                     alert("删除失败!");
                 }
             })
@@ -93,10 +91,9 @@ function add() {
     var tableMain = document.querySelector(".main-table");
     tr.classList.add("tr");
     var html = `
-     <input  id="username" class="td" ></input>
-                    <input  id="password" class="td"></input>
-                    <input  id="nowCount" class="td"></input>
-                    <input  id="allCount" class="td"></input>
+                    <input  id="s_num" class="td" ></input>
+                    <input  id="s_name" class="td" ></input>
+                    <input id="s_password" class="td"></input>
                     <div class="td td-normal-option">
                         <button class="submitAdd">提交</button>
                         <button class="cancelAdd">取消</button>
@@ -106,32 +103,29 @@ function add() {
 
     var submit = tr.querySelector(".submitAdd");
     var cancel = tr.querySelector(".cancelAdd");
+
     submit.addEventListener("click", () => {
-        var obj = getUser(tr);
+        var sNum = tr.querySelector("#s_num").value;
+        var sName = tr.querySelector("#s_name").value;
+        var password = tr.querySelector("#s_password").value;
+        var obj = {
+            "studentNumber": sNum,
+            "name": sName,
+            "password": password
+        }
         console.log(obj);
+        formPost("addStudent",obj,function (result){
+            if(result.code){
+                flush();
+            }else{
+                alert(result.msg);
+            }
+        })
     })
     cancel.addEventListener("click", () => {
-            tr.remove();
-        })
-        //tr.classList.add("tr-normal");
-        //trInit(tr);
+        tr.remove();
+    })
+    //tr.classList.add("tr-normal");
+    //trInit(tr);
     tableMain.insertAdjacentElement("beforeend", tr);
-}
-//对执行增加作用的那一行数据增加相关的操作
-function addTrInit(tr) {
-
-}
-//得到input中有关用户的数据
-function getUser(tr) {
-    var username = tr.querySelector("#username").value;
-    var password = tr.querySelector("#password").value;
-    var nowCount = tr.querySelector("#nowCount").value;
-    var allCount = tr.querySelector("#allCount").value;
-    var obj = {
-        "username": username,
-        "password": password,
-        "nowCount": nowCount,
-        "allCount": allCount
-    }
-    return obj;
 }

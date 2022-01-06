@@ -7,9 +7,9 @@ public class Student {
     private int s_num;
     private int t_id=0;
     private String state="Start";
-    private int v1;
-    private int v2;
-    private int v3;
+    private int v1=0;
+    private int v2=0;
+    private int v3=0;
 
     public String getState() {
         return state;

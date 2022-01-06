@@ -1,10 +1,13 @@
 package com.alexlin.controller;
 
 import com.alexlin.model.Student;
+import com.alexlin.model.Teacher;
 import com.alexlin.service.StudentService;
+import com.alexlin.service.TeacherService;
 import com.alexlin.utils.ReturnContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +17,8 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private StudentService studentService;
-
+    @Autowired
+    private TeacherService teacherService;
     // 学生登录
     @PostMapping("/login")
     @ResponseBody
@@ -33,7 +37,57 @@ public class StudentController {
             return new ReturnContent(true, "登录成功！", student);
         }
     }
-
+    //学生主页,登录成功则改学号必有其人
+    @GetMapping("/home")
+    public String home(ModelMap model,String number){
+        Student student = studentService.findStudentByNumber(number);
+        System.out.println(student.toString());
+        String teacherName = "选择中";
+        String state = "学生选择志愿中";
+        String v1 = "未确定";
+        String v2 = "未确定";
+        String v3 = "未确定";
+        //确定志愿的老师的名字
+        if (student.getV1() != 0) {
+            Teacher teacher = teacherService.findTeacherById(student.getV1());
+            v1 = teacher.getT_name();
+        }
+        if(student.getV2()!=0){
+            Teacher teacher = teacherService.findTeacherById(student.getV2());
+            v2 = teacher.getT_name();
+        }
+        if(student.getV3()!=0){
+            Teacher teacher = teacherService.findTeacherById(student.getV3());
+            v3 = teacher.getT_name();
+        }
+        //确定导师的名字
+        if(student.getT_id()!=0){
+            Teacher teacher = teacherService.findTeacherById(student.getV3());
+            teacherName = teacher.getT_name();
+        }
+        //确定状态
+        if(student.getState()=="Start"){
+            state = "选择志愿中";
+        }else if(student.getState()=="Ready"){
+            state = "第一志愿老师选择中";
+        }else if(student.getState()=="V1Out"){
+            state = "第一志愿落选";
+        }else if(student.getState()=="V2Out"){
+            state = "第二志愿落选";
+        }else if (student.getState()=="V3Out"){
+            state = "第三志愿落选";
+        }else if(student.getState()=="Finish"){
+            state = "志愿选择结束";
+        }
+        model.addAttribute("number",number);
+        model.addAttribute("student",student);
+        model.addAttribute("teacherName",teacherName);
+        model.addAttribute("state",state);
+        model.addAttribute("v1",v1);
+        model.addAttribute("v2",v2);
+        model.addAttribute("v3",v3);
+        return "student/studentHome";
+    }
     // 学生注册
     @PostMapping("/register")
     @ResponseBody
@@ -57,10 +111,11 @@ public class StudentController {
     // 学生选老师
     @PostMapping("/setTeacher")
     @ResponseBody
-    public ReturnContent setTeacher(Student student) {
+    public ReturnContent setTeacher(@RequestBody Student student) {
         /*
           应该传递四个参数，v1，v2，v3和学生的id，同时设置状态为ready
          */
+        System.out.println(student);
         if (studentService.setTeacher(student) == 0) {
             return new ReturnContent(false, "选择失败！", "");
         } else {
@@ -122,52 +177,32 @@ public class StudentController {
         }
     }
 
-    // 一志愿落选
-    @PostMapping("/v1Out")
-    @ResponseBody
-    public ReturnContent setV1Out(@RequestParam(value = "s_id", defaultValue = "-1") int s_id) {
 
-        if (s_id == -1) {
-            return new ReturnContent(false, "参数必须填写", "");
+    @GetMapping("/selectTeacher")
+    public String selectTeacher(ModelMap model,@RequestParam("number") String number){
+        Student student = studentService.findStudentByNumber(number);
+        List<Teacher> list = teacherService.findAll();
+        //学生志愿的老师名字
+        String v1Teacher = "未确定";
+        String v2Teacher = "未确定";
+        String v3Teacher = "未确定";
+        System.out.println(student.toString());
+        if(student.getV1()!=0){
+             v1Teacher = teacherService.findTeacherById(student.getV1()).getT_name();
         }
-
-        if (studentService.setV1Out(s_id) == 0) {
-            return new ReturnContent(false, "状态设置失败", "");
-        } else {
-            return new ReturnContent(true, "设置状态成功", "");
+        if(student.getV2()!=0){
+             v2Teacher = teacherService.findTeacherById(student.getV2()).getT_name();
         }
-    }
-
-    // 二志愿落选
-    @PostMapping("/v2Out")
-    @ResponseBody
-    public ReturnContent setV2Out(@RequestParam(value = "s_id", defaultValue = "-1") int s_id) {
-
-        if (s_id == -1) {
-            return new ReturnContent(false, "参数必须填写", "");
+        if(student.getV3()!=0){
+            v3Teacher = teacherService.findTeacherById(student.getV3()).getT_name();
         }
-
-        if (studentService.setV2Out(s_id) == 0) {
-            return new ReturnContent(false, "状态设置失败", "");
-        } else {
-            return new ReturnContent(true, "设置状态成功", "");
-        }
-    }
-
-    // 三志愿落选
-    @PostMapping("/v3Out")
-    @ResponseBody
-    public ReturnContent setV3Out(@RequestParam(value = "s_id", defaultValue = "-1") int s_id) {
-
-        if (s_id == -1) {
-            return new ReturnContent(false, "参数必须填写", "");
-        }
-
-        if (studentService.setV3Out(s_id) == 0) {
-            return new ReturnContent(false, "状态设置失败", "");
-        } else {
-            return new ReturnContent(true, "设置状态成功", "");
-        }
+        model.addAttribute("number",number);
+        model.addAttribute("v1TeacherName",v1Teacher);
+        model.addAttribute("v2TeacherName",v2Teacher);
+        model.addAttribute("v3TeacherName",v3Teacher);
+        model.addAttribute("s_id",student.getS_id());
+        model.addAttribute("list", list);
+        return "/student/studentSelect";
     }
 
 }

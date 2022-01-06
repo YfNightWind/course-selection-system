@@ -29,8 +29,8 @@ public class AdminController {
 
     @GetMapping("/showStudent")
     public String showStudent(ModelMap model) {
-        System.out.println("here is amdin showStudent");
-        model.addAttribute("demo", "demo");
+        List<Student> studentList = studentService.findAll();
+        model.addAttribute("list",studentList);
         return "admin/showStudent";
     }
 
@@ -38,6 +38,7 @@ public class AdminController {
     public String showTeacher(ModelMap model) {
         System.out.println("here is amdin showStudent--------------------------");
         List<Teacher> list = teacherService.findAll();
+
         model.addAttribute("list", list);
         return "admin/showTeacher";
     }
@@ -68,23 +69,23 @@ public class AdminController {
         return new ReturnContent(true, "成功", adminService.getDate().getDate());
     }
 
-    // 管理员修改date
-    @PostMapping("/modifyDate")
-    @ResponseBody
-    public ReturnContent modifyDate(@RequestParam(value = "date", defaultValue = "-2") int date) {
-
-        if (date == -2) {
-            return new ReturnContent(false, "参数必须填写", "");
-        }
-
-        int row = adminService.modifyDate(date);
-
-        if (row == 0) {
-            return new ReturnContent(false, "修改失败", "");
-        } else {
-            return new ReturnContent(true, "修改成功！", "");
-        }
-    }
+//    // 管理员修改date
+//    @PostMapping("/modifyDate")
+//    @ResponseBody
+//    public ReturnContent modifyDate(@RequestParam(value = "date", defaultValue = "-2") int date) {
+//
+//        if (date == -2) {
+//            return new ReturnContent(false, "参数必须填写", "");
+//        }
+//
+//        int row = adminService.modifyDate(date);
+//
+//        if (row == 0) {
+//            return new ReturnContent(false, "修改失败", "");
+//        } else {
+//            return new ReturnContent(true, "修改成功！", "");
+//        }
+//    }
 
     // =================================================================================================
     // =======================================学生相关===================================================
@@ -93,7 +94,7 @@ public class AdminController {
     // 管理员更新学生
     @PostMapping("/updateStudent")
     @ResponseBody
-    public ReturnContent updateStudent(Student student) {
+    public ReturnContent updateStudent(@RequestBody Student student) {
 
         if (studentService.updateStudent(student) == 0) {
             return new ReturnContent(false, "更新失败！", "");
@@ -147,6 +148,9 @@ public class AdminController {
             return new ReturnContent(false, "添加失败", "");
         }
     }
+
+
+
     // =================================================================================================
     // =======================================教师相关===================================================
     // =================================================================================================
@@ -171,7 +175,7 @@ public class AdminController {
             return new ReturnContent(false, "参数必须填写！", "");
         }
 
-        int rows = teacherService.addTeacher(name, password);
+        int rows = teacherService.adminAddTeacher(name,password,count,max);
 
         if (rows > 0) {
             return new ReturnContent(true, "添加成功", "");
@@ -223,5 +227,37 @@ public class AdminController {
         } else {
             return new ReturnContent(true, "设置成功！", "");
         }
+    }
+    //学生开始选择导师
+    @PostMapping("/setState")
+    @ResponseBody
+    public ReturnContent setState( @RequestParam(value = "state", defaultValue = "") String state){
+        System.out.println(state);
+        String msg = "学生填报志愿中";
+        if(state.equals("Start")){
+            //学生填报志愿阶段
+            adminService.setStart();
+        }else if(state.equals("Ready")){
+            adminService.setReady();
+            msg = "学生填报志愿结束，导师对第一志愿为自身的学生进行选择";
+        }else if(state.equals("V1Out")){
+            adminService.setV1Out();
+            msg="第一志愿选择时间截止，导师对第二志愿为自身的学生进行选择";
+        }else if(state.equals("V2Out")){
+            adminService.setV2Out();
+            msg="第二志愿选择时间截止，导师对第三志愿为自身的学生进行选择";
+        }else if(state.equals("V3Out")){
+            adminService.setV3Out();
+            msg="第三志愿选择时间截止，进行差额补选";
+        }else if(state.equals("byElection")){
+            adminService.byElectionAll();
+            msg="所有学生差额补选完成";
+        }
+
+        return new ReturnContent(true,msg,"");
+    }
+    @GetMapping("/setTime")
+    public String setTime(@RequestParam(value = "id") int id){
+        return "admin/setTime";
     }
 }

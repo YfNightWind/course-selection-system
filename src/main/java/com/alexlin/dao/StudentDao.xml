@@ -21,7 +21,7 @@
     </insert>
     <!-- 以学号查找学生，判断该学生是否注册过-->
     <select id="findStudentByNumber" resultType="Student" parameterType="String">
-        SELECT s_name
+        SELECT *
         FROM student
         WHERE s_num = #{studentNumber}
     </select>
@@ -39,6 +39,9 @@
             <if test="s_password != null and s_password != ''">s_password=#{s_password},</if>
             <if test="s_num != null and s_num != ''">s_num=#{s_num},</if>
             <if test="t_id != null and t_id != ''">t_id=#{t_id}</if>
+            <if test="v1 != null and v1 != ''">v1=#{v1}</if>
+            <if test="v2 != null and v2 != ''">v2=#{v2}</if>
+            <if test="v3 != null and v3 != ''">v3=#{v3}</if>
         </set>
         where s_num = #{s_num}
     </update>
@@ -64,21 +67,21 @@
     <select id="matchV1" parameterType="int" resultType="Student">
         select *
         from student
-        where v1 = #{teacherId}
+        where v1 = 1 and state = "Ready";
     </select>
 
     <!-- 第二志愿-->
     <select id="matchV2" parameterType="int" resultType="Student">
         select *
         from student
-        where v2 = #{teacherId}
+        where v2 = #{teacherId} and state = "V1Out";
     </select>
 
     <!-- 第三志愿-->
     <select id="matchV3" parameterType="int" resultType="Student">
         select *
         from student
-        where v3 = #{teacherId}
+        where v3 = #{teacherId} and state = "V2Out";
     </select>
 
     <!-- 被老师选上了-->
@@ -86,7 +89,7 @@
         update student
         <set>
             <if test="t_id != null and t_id !=''">t_id = #{t_id},</if>
-            state = "finish"
+            state = "Finish"
         </set>
         where s_id = #{s_id}
     </update>
@@ -124,4 +127,23 @@
         set state=#{state}
         WHERE s_id = #{s_id};
     </update>
+
+    <!--设置所有学生状态-->
+    <update id="setAll" parameterType="String">
+        update student set state =#{state};
+    </update>
+    <!--设置志愿落选-->
+    <update id="setVOut" parameterType="String">
+        update student set state = #{VOut}
+        where state &lt;&gt; "Finish";
+    </update>
+    <!--使用map，与chosen不冲突-->
+    <update id="setTid" parameterType="Map">
+        update student set t_id = #{t_id},state="Finish"
+        where s_id = #{s_id};
+    </update>
+    <select id="getAllNotFinish" resultType="Student">
+        select * from student
+        where state &lt;&gt; "Finish";
+    </select>
 </mapper>

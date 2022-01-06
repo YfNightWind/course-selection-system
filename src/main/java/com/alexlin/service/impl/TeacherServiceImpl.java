@@ -25,8 +25,8 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher teacherLogin(String id, String password) {
-        return teacherDao.teacherLogin(id, password);
+    public Teacher teacherLogin(String name, String password) {
+        return teacherDao.teacherLogin(name, password);
     }
 
     @Override
@@ -56,11 +56,26 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public int chosen(int s_id, int t_id) {
+        teacherDao.addScount(t_id);
         return studentDao.chosen(s_id, t_id);
     }
 
     @Override
     public Teacher findTeacherById(int id) {
         return teacherDao.findTeacherById(id);
+    }
+    @Override
+    public int byElection(int s_id) {
+        int t_id = 0;
+        List<Teacher> teacherList = teacherDao.findAll();
+        for (Teacher teacher : teacherList) {
+            if (teacher.getS_count() < teacher.getS_max()) {
+                t_id = teacher.getT_id();
+                //学生导师确定
+                chosen(s_id, t_id);
+                break;
+            }
+        }
+        return t_id;
     }
 }

@@ -44,22 +44,23 @@ function formPost(url,data,callback){
         }
     }
 }
-function formDelete(){
+function formDelete(url,data,callback){
     var xhr =new XMLHttpRequest();
-    xhr.open("delete",url,true);
-    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-    //拼装url
     var dataArr = Object.entries(data);
     formdata=""
     dataArr.forEach((item,index)=>{
         if(index!=0){
             formdata+="&"+item[0]+"="+item[1];
         }else{
-            formdata+=item[0]+"="+item[1];
+            formdata+="?"+item[0]+"="+item[1];
         }
     })
+    xhr.open("delete",url+formdata,true);
+    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    //拼装url
 
-    xhr.send(formdata);
+
+    xhr.send(null);
     xhr.onreadystatechange=()=>{
         if(xhr.readyState==4){
             if((xhr.status>=200&&xhr.status<300)||xhr.status==304){
@@ -75,5 +76,18 @@ function formDelete(){
 function flush(){
     location.reload(true);
 }
-
+function get(url,callback){
+    let xhr =new XMLHttpRequest();
+    xhr.onreadystatechange=()=>{
+        if(xhr.readyState==4){
+            if((xhr.status>=200&&xhr.status<300)||xhr.status==304){
+                callback(xhr.responseText);
+            }else{
+                alert("Request was unsuccessful:"+xhr.status);
+            }
+        }
+    }
+    xhr.open("GET",url,false);
+    xhr.send(null);
+}
 

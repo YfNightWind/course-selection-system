@@ -34,4 +34,6 @@ public interface TeacherService {
     int chosen(int s_id, int t_id);
 
     Teacher findTeacherById(int t_id);
+    //差额补选
+    int byElection(int s_id);
 }

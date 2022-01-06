@@ -11,5 +11,13 @@ public interface AdminService {
     Admin getDate();
 
     // 管理员修改date
-    int modifyDate(int date);
+    int setReady();
+    int setStart();
+    //设置志愿截止
+    int setV1Out();
+    int setV2Out();
+    int setV3Out();
+    //对所有未Finish的学生进行差额补选
+    //返回差额补选的学生的数量
+    int byElectionAll();
 }

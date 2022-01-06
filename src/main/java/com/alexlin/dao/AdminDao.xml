@@ -19,7 +19,7 @@
     <update id="modifyDate" parameterType="Integer">
         update admin
         <set>
-            <if test="date != null and date != ''">date = #{date}</if>
+            date = #{date}
         </set>
     </update>
 </mapper>
