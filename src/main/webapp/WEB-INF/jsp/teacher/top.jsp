@@ -11,17 +11,20 @@
     <title>Title</title>
 </head>
 <style>
-    .top{
+    .top {
         display: flex;
 
     }
-    .top>*{
-        flex:1;
+
+    .top > * {
+        flex: 1;
     }
-    .center_top{
+
+    .center_top {
         text-align: center;
     }
-    .right_top{
+
+    .right_top {
         text-align: right;
     }
 </style>
