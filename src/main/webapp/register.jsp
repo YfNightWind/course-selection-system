@@ -26,7 +26,7 @@
             <input checked onclick="student()" type="radio" name="role" value="学生">学生
         </label>
         <div class="submit">
-            <button type="submit" onclick="submit()">注册</button>
+            <button type="submit" onclick="submit()" id="button">注册</button>
         </div>
     </div>
 

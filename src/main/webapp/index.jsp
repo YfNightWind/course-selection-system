@@ -33,7 +33,7 @@
             <input checked onclick="student()" type="radio" name="role" value="学生">学生
         </label>
         <div class="submit">
-            <button type="submit" onclick="login()">登录</button>
+            <button type="submit" onclick="login()" id="button">登录</button>
         </div>
         <a href="register.jsp">点击注册</a>
     </div>
