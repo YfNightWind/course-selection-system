@@ -42,7 +42,7 @@ public class StudentController {
     public String home(ModelMap model,String number){
         Student student = studentService.findStudentByNumber(number);
         System.out.println(student.toString());
-        String teacherName = "选择中";
+        String teacherName = "未确定";
         String state = "学生选择志愿中";
         String v1 = "未确定";
         String v2 = "未确定";
@@ -62,22 +62,22 @@ public class StudentController {
         }
         //确定导师的名字
         if(student.getT_id()!=0){
-            Teacher teacher = teacherService.findTeacherById(student.getV3());
+            Teacher teacher = teacherService.findTeacherById(student.getT_id());
             teacherName = teacher.getT_name();
         }
         //确定状态
-        if(student.getState()=="Start"){
+        if(student.getState().equals("Start")){
             state = "选择志愿中";
-        }else if(student.getState()=="Ready"){
+        }else if(student.getState().equals("Ready")){
             state = "第一志愿老师选择中";
-        }else if(student.getState()=="V1Out"){
+        }else if(student.getState().equals("V1Out")){
             state = "第一志愿落选";
-        }else if(student.getState()=="V2Out"){
+        }else if(student.getState().equals("V2Out")){
             state = "第二志愿落选";
-        }else if (student.getState()=="V3Out"){
+        }else if (student.getState().equals("V3Out")){
             state = "第三志愿落选";
-        }else if(student.getState()=="Finish"){
-            state = "志愿选择结束";
+        }else if(student.getState().equals("Finish")){
+            state = "志愿选择结束，已选择导师";
         }
         model.addAttribute("number",number);
         model.addAttribute("student",student);
