@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -56,18 +56,6 @@
                 </div>
             </c:forEach>
         </div>
-
-<%--        <div class="tfooter">
-            <div class="amount">当前<span class="current_page">1</span>页, 总
-                <span class="num_recoder">7</span>条记录
-            </div>
-            <div class="page_turn">
-                <button class="previous">上一页</button>
-                <button class="num_page">1</button>
-                <button class="num_page">2</button>
-                <button class="next">下一页</button>
-            </div>
-        </div>--%>
     </div>
 
 </div>

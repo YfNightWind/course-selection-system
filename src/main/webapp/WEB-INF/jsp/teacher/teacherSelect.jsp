@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -43,9 +43,9 @@
         <div class="main-table">
             <c:forEach items="${list}" var="student">
                 <div class="tr tr-normal">
-                    <input readonly  class="td" value="${student.s_name}"></input>
-                    <input readonly  class="td" value="${teacher.s_count}"></input>
-                    <input readonly  class="td" value="${teacher.s_max}"></input>
+                    <input readonly class="td" value="${student.s_name}"></input>
+                    <input readonly class="td" value="${teacher.s_count}"></input>
+                    <input readonly class="td" value="${teacher.s_max}"></input>
                     <div class="td td-normal-option">
                         <button onclick="select(${teacher.t_id},${student.s_id})">选择该生</button>
                         <button onclick="out(${student.s_id})">放弃该生</button>

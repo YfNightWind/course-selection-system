@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -39,39 +39,24 @@
             <div class="th">操作</div>
         </div>
         <div class="main-table">
-        <c:forEach items="${list}" var="teacher">
-            <div class="tr tr-normal">
-                <input readonly id="username" class="td" value="${teacher.t_name}"></input>
-                <input readonly id="password" class="td" value="${teacher.t_password}"></input>
-                <input readonly id="nowCount" class="td" value="${teacher.s_count}"></input>
-                <input readonly id="allCount" class="td" value="${teacher.s_max}"></input>
-                <div class="td td-normal-option">
-                    <button class="modify">修改</button>
-                    <button class="delete">删除</button>
+            <c:forEach items="${list}" var="teacher">
+                <div class="tr tr-normal">
+                    <input readonly id="username" class="td" value="${teacher.t_name}"></input>
+                    <input readonly id="password" class="td" value="${teacher.t_password}"></input>
+                    <input readonly id="nowCount" class="td" value="${teacher.s_count}"></input>
+                    <input readonly id="allCount" class="td" value="${teacher.s_max}"></input>
+                    <div class="td td-normal-option">
+                        <button class="modify">修改</button>
+                        <button class="delete">删除</button>
+                    </div>
+                    <div class="td hide td-modify-option">
+                        <button class="submit">提交</button>
+                        <button class="cancel">取消</button>
+                    </div>
+                    <input id="userid" style="display: none;" value="${teacher.t_id}"></input>
                 </div>
-                <div class="td hide td-modify-option">
-                    <button class="submit">提交</button>
-                    <button class="cancel">取消</button>
-                </div>
-                <input id="userid" style="display: none;" value="${teacher.t_id}"></input>
-            </div>
-
-
-        </c:forEach>
-
+            </c:forEach>
         </div>
-
-<%--        <div class="tfooter">
-            <div class="amount">当前<span class="current_page">1</span>页, 总
-                <span class="num_recoder">7</span>条记录
-            </div>
-            <div class="page_turn">
-                <button class="previous">上一页</button>
-                <button class="num_page">1</button>
-                <button class="num_page">2</button>
-                <button class="next">下一页</button>
-            </div>
-        </div>--%>
     </div>
 
 </div>

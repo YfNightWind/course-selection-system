@@ -17,10 +17,10 @@
 <div class="container">
     <div class="studentNumber"><input type="text" id="studentNumber" placeholder="请输入您学号"></div>
     <div class="name"><input type="text" id="name" placeholder="请输入您的用户名"></div>
-    <div class="password"><input type="text" id="password"  placeholder="请输入您的密码"></div>
+    <div class="password"><input type="text" id="password" placeholder="请输入您的密码"></div>
     <div class="role">
         <label class="checkbox-inline">
-            <input  onclick="teacher()" type="radio" name="role" value="教师">教师
+            <input onclick="teacher()" type="radio" name="role" value="教师">教师
         </label>
         <label class="checkbox-inline">
             <input checked onclick="student()" type="radio" name="role" value="学生">学生
@@ -34,43 +34,43 @@
 </body>
 <script>
     //学生注册比教师注册多了一个输入字段
-    function student(){
+    function student() {
         var studentNumber = document.querySelector(".studentNumber");
-        studentNumber.style.display="block";
+        studentNumber.style.display = "block";
     }
-    function teacher(){
+
+    function teacher() {
         var studentNumber = document.querySelector(".studentNumber");
-        studentNumber.style.display="none";
+        studentNumber.style.display = "none";
     }
-    function  submit(){
+
+    function submit() {
         var roles = document.getElementsByName("role");
         var role = "";
-        roles.forEach((rolebox)=>{
-            if(rolebox.checked){
+        roles.forEach((rolebox) => {
+            if (rolebox.checked) {
                 role = rolebox.value;
                 console.log(role);
             }
         })
-        var data={
-            "name":document.getElementById("name").value,
-            "studentNumber":document.getElementById("studentNumber").value,
-            "password":document.getElementById("password").value
+        var data = {
+            "name": document.getElementById("name").value,
+            "studentNumber": document.getElementById("studentNumber").value,
+            "password": document.getElementById("password").value
         }
         var url = "";
-        if(role=="学生"){
+        if (role == "学生") {
             url = "student/register";
-        }else if(role=="教师"){
+        } else if (role == "教师") {
             url = "teacher/register";
         }
-        formPost(url,data,function (result){
-            if(result.code){
-                location.href="/";
-            }else{
+        formPost(url, data, function (result) {
+            if (result.code) {
+                location.href = "/";
+            } else {
                 alert(result.msg);
             }
         })
     }
-
-
 </script>
 </html>
