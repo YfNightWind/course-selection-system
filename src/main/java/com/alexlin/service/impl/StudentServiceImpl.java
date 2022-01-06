@@ -3,7 +3,6 @@ package com.alexlin.service.impl;
 import com.alexlin.dao.StudentDao;
 import com.alexlin.dao.TeacherDao;
 import com.alexlin.model.Student;
-import com.alexlin.model.Teacher;
 import com.alexlin.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,7 +70,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-
     @Override
     public void setReady(int s_id) {
         Student student = new Student();
@@ -97,13 +95,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int setTid(int t_id, int s_id) {
-        Map<String,Object> map = new HashMap<String, Object>();
-        map.put("t_id",t_id);
-        map.put("s_id",s_id);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("t_id", t_id);
+        map.put("s_id", s_id);
         return studentDao.setTid(map);
     }
-
-
 
 
 }

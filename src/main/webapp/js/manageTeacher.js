@@ -5,12 +5,13 @@ function init() {
         trInit(tr);
     })
 }
+
 init();
 
 function trInit(tr) {
-    tr.addEventListener("click", function(e) {
+    tr.addEventListener("click", function (e) {
         var option = e.target.className
-            //打开更改操作界面
+        //打开更改操作界面
         if (option == "modify") {
             switchOption(tr);
 
@@ -26,13 +27,13 @@ function trInit(tr) {
                 "t_password": password,
                 "s_count": nowCount,
                 "s_max": allCount,
-                "t_id":id
+                "t_id": id
             }
 
-            formPost("/admin/updateTeacher",obj, (data)=>{
-                if(data.code){
+            formPost("/admin/updateTeacher", obj, (data) => {
+                if (data.code) {
                     flush();
-                }else{
+                } else {
                     alert("更新失败");
                     switchOption();
                 }
@@ -42,13 +43,13 @@ function trInit(tr) {
             //删除学生
             var userid = tr.querySelector("#userid").value;
 
-            id={
-                "id":userid
+            id = {
+                "id": userid
             }
-            formDelete("/admin/deleteTeacher",id,function (data){
-                if(data.code){
+            formDelete("/admin/deleteTeacher", id, function (data) {
+                if (data.code) {
                     flush();
-                }else{
+                } else {
                     alert("删除失败!");
                 }
             })
@@ -87,6 +88,7 @@ function switchOption(tr) {
     }
 
 }
+
 //增加数据
 function add() {
     var tr = document.createElement("div");
@@ -109,24 +111,26 @@ function add() {
     submit.addEventListener("click", () => {
         var obj = getUser(tr);
         console.log(obj);
-        formPost("addTeacher",obj,function (result){
+        formPost("addTeacher", obj, function (result) {
             alert(result.msg);
-            if(result.code){
+            if (result.code) {
                 flush();
             }
         })
     })
     cancel.addEventListener("click", () => {
-            tr.remove();
-        })
-        //tr.classList.add("tr-normal");
-        //trInit(tr);
+        tr.remove();
+    })
+    //tr.classList.add("tr-normal");
+    //trInit(tr);
     tableMain.insertAdjacentElement("beforeend", tr);
 }
+
 //对执行增加作用的那一行数据增加相关的操作
 function addTrInit(tr) {
 
 }
+
 //得到input中有关用户的数据
 function getUser(tr) {
     var username = tr.querySelector("#username").value;

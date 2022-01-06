@@ -19,6 +19,7 @@ public class StudentController {
     private StudentService studentService;
     @Autowired
     private TeacherService teacherService;
+
     // 学生登录
     @PostMapping("/login")
     @ResponseBody
@@ -37,9 +38,10 @@ public class StudentController {
             return new ReturnContent(true, "登录成功！", student);
         }
     }
+
     //学生主页,登录成功则改学号必有其人
     @GetMapping("/home")
-    public String home(ModelMap model,String number){
+    public String home(ModelMap model, String number) {
         Student student = studentService.findStudentByNumber(number);
         System.out.println(student.toString());
         String teacherName = "未确定";
@@ -52,42 +54,43 @@ public class StudentController {
             Teacher teacher = teacherService.findTeacherById(student.getV1());
             v1 = teacher.getT_name();
         }
-        if(student.getV2()!=0){
+        if (student.getV2() != 0) {
             Teacher teacher = teacherService.findTeacherById(student.getV2());
             v2 = teacher.getT_name();
         }
-        if(student.getV3()!=0){
+        if (student.getV3() != 0) {
             Teacher teacher = teacherService.findTeacherById(student.getV3());
             v3 = teacher.getT_name();
         }
         //确定导师的名字
-        if(student.getT_id()!=0){
+        if (student.getT_id() != 0) {
             Teacher teacher = teacherService.findTeacherById(student.getT_id());
             teacherName = teacher.getT_name();
         }
         //确定状态
-        if(student.getState().equals("Start")){
+        if (student.getState().equals("Start")) {
             state = "选择志愿中";
-        }else if(student.getState().equals("Ready")){
+        } else if (student.getState().equals("Ready")) {
             state = "第一志愿老师选择中";
-        }else if(student.getState().equals("V1Out")){
+        } else if (student.getState().equals("V1Out")) {
             state = "第一志愿落选";
-        }else if(student.getState().equals("V2Out")){
+        } else if (student.getState().equals("V2Out")) {
             state = "第二志愿落选";
-        }else if (student.getState().equals("V3Out")){
+        } else if (student.getState().equals("V3Out")) {
             state = "第三志愿落选";
-        }else if(student.getState().equals("Finish")){
+        } else if (student.getState().equals("Finish")) {
             state = "志愿选择结束，已选择导师";
         }
-        model.addAttribute("number",number);
-        model.addAttribute("student",student);
-        model.addAttribute("teacherName",teacherName);
-        model.addAttribute("state",state);
-        model.addAttribute("v1",v1);
-        model.addAttribute("v2",v2);
-        model.addAttribute("v3",v3);
+        model.addAttribute("number", number);
+        model.addAttribute("student", student);
+        model.addAttribute("teacherName", teacherName);
+        model.addAttribute("state", state);
+        model.addAttribute("v1", v1);
+        model.addAttribute("v2", v2);
+        model.addAttribute("v3", v3);
         return "student/studentHome";
     }
+
     // 学生注册
     @PostMapping("/register")
     @ResponseBody
@@ -179,7 +182,7 @@ public class StudentController {
 
 
     @GetMapping("/selectTeacher")
-    public String selectTeacher(ModelMap model,@RequestParam("number") String number){
+    public String selectTeacher(ModelMap model, @RequestParam("number") String number) {
         Student student = studentService.findStudentByNumber(number);
         List<Teacher> list = teacherService.findAll();
         //学生志愿的老师名字
@@ -187,20 +190,20 @@ public class StudentController {
         String v2Teacher = "未确定";
         String v3Teacher = "未确定";
         System.out.println(student.toString());
-        if(student.getV1()!=0){
-             v1Teacher = teacherService.findTeacherById(student.getV1()).getT_name();
+        if (student.getV1() != 0) {
+            v1Teacher = teacherService.findTeacherById(student.getV1()).getT_name();
         }
-        if(student.getV2()!=0){
-             v2Teacher = teacherService.findTeacherById(student.getV2()).getT_name();
+        if (student.getV2() != 0) {
+            v2Teacher = teacherService.findTeacherById(student.getV2()).getT_name();
         }
-        if(student.getV3()!=0){
+        if (student.getV3() != 0) {
             v3Teacher = teacherService.findTeacherById(student.getV3()).getT_name();
         }
-        model.addAttribute("number",number);
-        model.addAttribute("v1TeacherName",v1Teacher);
-        model.addAttribute("v2TeacherName",v2Teacher);
-        model.addAttribute("v3TeacherName",v3Teacher);
-        model.addAttribute("s_id",student.getS_id());
+        model.addAttribute("number", number);
+        model.addAttribute("v1TeacherName", v1Teacher);
+        model.addAttribute("v2TeacherName", v2Teacher);
+        model.addAttribute("v3TeacherName", v3Teacher);
+        model.addAttribute("s_id", student.getS_id());
         model.addAttribute("list", list);
         return "/student/studentSelect";
     }

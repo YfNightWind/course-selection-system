@@ -13,7 +13,6 @@
 <style>
     .top {
         display: flex;
-
     }
 
     .top > * {

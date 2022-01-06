@@ -26,6 +26,7 @@ public class TeacherController {
 
     @Autowired
     private AdminService adminService;
+
     // 教师登录
     @PostMapping("/login")
     @ResponseBody
@@ -34,7 +35,7 @@ public class TeacherController {
         if (name.equals("") || password.equals("")) {
             return new ReturnContent(false, "参数必须填写！", "");
         }
-        System.out.println("name:"+name+"password:"+password);
+        System.out.println("name:" + name + "password:" + password);
         Teacher teacher = teacherService.teacherLogin(name, password);
         System.out.println(teacher.toString());
 
@@ -82,6 +83,7 @@ public class TeacherController {
             return new ReturnContent(true, "选择成功", "");
         }
     }
+
     // 一志愿落选
     @PostMapping("/vOut")
     @ResponseBody
@@ -93,20 +95,20 @@ public class TeacherController {
         Admin admin = adminService.getDate();
         int date = admin.getDate();
         //date==0表示进行第一志愿的选择
-        if(date==0){
+        if (date == 0) {
             if (studentService.setV1Out(s_id) == 0) {
                 return new ReturnContent(false, "状态设置失败", "");
             } else {
                 return new ReturnContent(true, "设置状态成功", "");
             }
-        }else if(date==1){
+        } else if (date == 1) {
             //date==1表示开始第二志愿的选择
             if (studentService.setV2Out(s_id) == 0) {
                 return new ReturnContent(false, "状态设置失败", "");
             } else {
                 return new ReturnContent(true, "设置状态成功", "");
             }
-        }else if(date==2){
+        } else if (date == 2) {
             //date==2表示进行第三志愿的选择
             if (studentService.setV3Out(s_id) == 0) {
                 return new ReturnContent(false, "状态设置失败", "");
@@ -115,7 +117,7 @@ public class TeacherController {
             }
         }
 
-        return  new ReturnContent(true,"选择已结束","");
+        return new ReturnContent(true, "选择已结束", "");
     }
 
     // 二志愿落选
@@ -149,36 +151,36 @@ public class TeacherController {
             return new ReturnContent(true, "设置状态成功", "");
         }
     }
+
     @GetMapping("selectStudent")
-    public String selectStudent(int t_id, ModelMap model){
+    public String selectStudent(int t_id, ModelMap model) {
         System.out.println(t_id);
         String title = "当前所有学生还未选择完毕";
         Admin admin = adminService.getDate();
         int date = admin.getDate();
         List<Student> studentList = null;
-        if(date==-1){
+        if (date == -1) {
             //此时学生还未选择完毕，导师还不可以进行选择
             studentList = new ArrayList<Student>();//给学生列表赋值为空
-        }
-        else if(date==0){
-            title="第一志愿选择进行中";
+        } else if (date == 0) {
+            title = "第一志愿选择进行中";
             studentList = studentService.matchV1(t_id);//得到第一志愿是该老师的学生同时状态为Ready的学生
-        }else if(date==1){
-            title="第二志愿选择进行中";
+        } else if (date == 1) {
+            title = "第二志愿选择进行中";
             studentList = studentService.matchV2(t_id);//得到第二志愿是该老师的学生同时状态为V1Out的学生
-        }else if(date==2){
-            title="第三志愿选择进行中";
+        } else if (date == 2) {
+            title = "第三志愿选择进行中";
             studentList = studentService.matchV3(t_id);//得到第三志愿是该老师的学生同时状态为V2Out的学生
-        }else{
+        } else {
             //此时要么差额补选，要么已经结束了
-            title="志愿选择已结束";
+            title = "志愿选择已结束";
             studentList = new ArrayList<Student>();//给学生列表赋值为空
         }
 
-        model.addAttribute("list",studentList);
-        model.addAttribute("title",title);
+        model.addAttribute("list", studentList);
+        model.addAttribute("title", title);
         Teacher teacher = teacherService.findTeacherById(t_id);
-        model.addAttribute("teacher",teacher);
+        model.addAttribute("teacher", teacher);
         return "teacher/teacherSelect";
     }
 }

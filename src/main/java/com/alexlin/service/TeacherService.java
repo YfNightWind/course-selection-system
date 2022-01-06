@@ -1,10 +1,6 @@
 package com.alexlin.service;
 
-
-import com.alexlin.model.Student;
 import com.alexlin.model.Teacher;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -34,6 +30,7 @@ public interface TeacherService {
     int chosen(int s_id, int t_id);
 
     Teacher findTeacherById(int t_id);
+
     //差额补选
     int byElection(int s_id);
 }

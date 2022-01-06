@@ -30,7 +30,7 @@ public class AdminController {
     @GetMapping("/showStudent")
     public String showStudent(ModelMap model) {
         List<Student> studentList = studentService.findAll();
-        model.addAttribute("list",studentList);
+        model.addAttribute("list", studentList);
         return "admin/showStudent";
     }
 
@@ -150,7 +150,6 @@ public class AdminController {
     }
 
 
-
     // =================================================================================================
     // =======================================教师相关===================================================
     // =================================================================================================
@@ -175,7 +174,7 @@ public class AdminController {
             return new ReturnContent(false, "参数必须填写！", "");
         }
 
-        int rows = teacherService.adminAddTeacher(name,password,count,max);
+        int rows = teacherService.adminAddTeacher(name, password, count, max);
 
         if (rows > 0) {
             return new ReturnContent(true, "添加成功", "");
@@ -228,36 +227,38 @@ public class AdminController {
             return new ReturnContent(true, "设置成功！", "");
         }
     }
+
     //学生开始选择导师
     @PostMapping("/setState")
     @ResponseBody
-    public ReturnContent setState( @RequestParam(value = "state", defaultValue = "") String state){
+    public ReturnContent setState(@RequestParam(value = "state", defaultValue = "") String state) {
         System.out.println(state);
         String msg = "学生填报志愿中";
-        if(state.equals("Start")){
+        if (state.equals("Start")) {
             //学生填报志愿阶段
             adminService.setStart();
-        }else if(state.equals("Ready")){
+        } else if (state.equals("Ready")) {
             adminService.setReady();
             msg = "学生填报志愿结束，导师对第一志愿为自身的学生进行选择";
-        }else if(state.equals("V1Out")){
+        } else if (state.equals("V1Out")) {
             adminService.setV1Out();
-            msg="第一志愿选择时间截止，导师对第二志愿为自身的学生进行选择";
-        }else if(state.equals("V2Out")){
+            msg = "第一志愿选择时间截止，导师对第二志愿为自身的学生进行选择";
+        } else if (state.equals("V2Out")) {
             adminService.setV2Out();
-            msg="第二志愿选择时间截止，导师对第三志愿为自身的学生进行选择";
-        }else if(state.equals("V3Out")){
+            msg = "第二志愿选择时间截止，导师对第三志愿为自身的学生进行选择";
+        } else if (state.equals("V3Out")) {
             adminService.setV3Out();
-            msg="第三志愿选择时间截止，进行差额补选";
-        }else if(state.equals("byElection")){
+            msg = "第三志愿选择时间截止，进行差额补选";
+        } else if (state.equals("byElection")) {
             adminService.byElectionAll();
-            msg="所有学生差额补选完成";
+            msg = "所有学生差额补选完成";
         }
 
-        return new ReturnContent(true,msg,"");
+        return new ReturnContent(true, msg, "");
     }
+
     @GetMapping("/setTime")
-    public String setTime(@RequestParam(value = "id") int id){
+    public String setTime(@RequestParam(value = "id") int id) {
         return "admin/setTime";
     }
 }

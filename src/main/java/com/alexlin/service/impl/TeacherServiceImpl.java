@@ -64,6 +64,7 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher findTeacherById(int id) {
         return teacherDao.findTeacherById(id);
     }
+
     @Override
     public int byElection(int s_id) {
         int t_id = 0;

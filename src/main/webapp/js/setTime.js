@@ -5,12 +5,13 @@ function getTime(date) {
     var time = new Date(y, m - 1, d);
     return time;
 }
+
 var date;
 
 function submit() {
-    var url="setState";
+    var url = "setState";
     var data = {
-        state:"Start"
+        state: "Start"
     }
     var flag = true;
     var v0Time = getTime(document.getElementById("v0Time").value);
@@ -24,16 +25,16 @@ function submit() {
         moreLate(v0Time, v1Time) ||
         moreLate(v0Time, v2Time) ||
         moreLate(v0Time, v3Time) ||
-        moreLate(v1Time,byElectionTime)||
-        moreLate(v2Time,byElectionTime)||
-        moreLate(v3Time,byElectionTime)||
-        moreLate(v0Time,byElectionTime)){
+        moreLate(v1Time, byElectionTime) ||
+        moreLate(v2Time, byElectionTime) ||
+        moreLate(v3Time, byElectionTime) ||
+        moreLate(v0Time, byElectionTime)) {
         alert("4个时间的设定必须依次递增");
         flag = false;
-    } else if(earlierNow(byElectionTime)) {
-    //差额补选
-        data.state="byElection";
-    }else if (earlierNow(v3Time)) {
+    } else if (earlierNow(byElectionTime)) {
+        //差额补选
+        data.state = "byElection";
+    } else if (earlierNow(v3Time)) {
         //第三志愿截止时间比现在还早，说明已经过了第三志愿截止时间
         data.state = "V3Out";
     } else if (earlierNow(v2Time)) {
@@ -44,10 +45,10 @@ function submit() {
         data.state = "V1Out";
     } else if (earlierNow(v0Time)) {
         //学生填报志愿结束，导师进行第一志愿的选择
-           data.state = "Ready";
+        data.state = "Ready";
     }
-    if(flag){
-        formPost(url,data,function (result){
+    if (flag) {
+        formPost(url, data, function (result) {
             alert(result.msg);
         })
     }
@@ -65,6 +66,7 @@ function earlierNow(date = new Date()) {
         return true;
     }
 }
+
 //如果date1晚于date2
 //则返回true。否则返回false
 function moreLate(date1, date2) {

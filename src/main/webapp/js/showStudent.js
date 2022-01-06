@@ -5,6 +5,7 @@ function init() {
         trInit(tr);
     })
 }
+
 init();
 
 function trInit(tr) {
@@ -85,6 +86,7 @@ function switchOption(tr) {
     }
 
 }
+
 //增加数据
 function add() {
     var tr = document.createElement("div");
@@ -114,10 +116,10 @@ function add() {
             "password": password
         }
         console.log(obj);
-        formPost("addStudent",obj,function (result){
-            if(result.code){
+        formPost("addStudent", obj, function (result) {
+            if (result.code) {
                 flush();
-            }else{
+            } else {
                 alert(result.msg);
             }
         })

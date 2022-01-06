@@ -21,7 +21,7 @@ function initVolunteerBtn() {
         var userid = tr.querySelector("#userid").value;
         //实现点击按钮，改变全局的志愿名字
         buttons.forEach((button) => {
-            button.addEventListener("click", function() {
+            button.addEventListener("click", function () {
                 if (this.className == "v1") {
                     v1 = username;
                     v1Id = userid;
@@ -47,19 +47,20 @@ function assignmnetVolunteers() {
     v2S.innerText = v2;
     v3S.innerText = v3;
 }
-function submit(s_id){
+
+function submit(s_id) {
     var url = "setTeacher";
-    var data={
-        "v1":v1Id,
-        "v2":v2Id,
-        "v3":v3Id,
-        "s_id":s_id
+    var data = {
+        "v1": v1Id,
+        "v2": v2Id,
+        "v3": v3Id,
+        "s_id": s_id
     }
     console.log(data);
-    post(url,data,function (result){
-        if(result.code){
+    post(url, data, function (result) {
+        if (result.code) {
             alert("志愿提交成功");
-        }else {
+        } else {
             alert(result.msg);
         }
     })
