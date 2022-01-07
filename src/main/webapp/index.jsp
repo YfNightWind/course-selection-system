@@ -21,7 +21,7 @@
 <h1>登录</h1>
 <div class="container">
     <div class="name"><input type="text" id="name" placeholder="请输入您的用户名"></div>
-    <div class="password"><input type="text" id="password" placeholder="请输入您的密码"></div>
+    <div class="password"><input type="password" id="password" placeholder="请输入您的密码"></div>
     <div class="role">
         <label class="checkbox-inline">
             <input type="radio" name="role" value="管理员" checked>管理员
